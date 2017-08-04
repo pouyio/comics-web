@@ -1,3 +1,26 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container-fluid">
+  <div class="row align-items-center">
+    <nav class="col-6">
+      <ul class="p-0">
+        <li class="d-inline-block">
+          <button type="button" class="btn btn-sm btn-secondary" (click)="location.back()" [hidden]="noBack">
+            <i class="fa fa-angle-left"></i>
+            Back
+          </button>
+        </li>
+        <li class="d-inline-block"><a routerLink="/login">Login</a></li>
+        <li class="d-inline-block"><a (click)="logout()">Logout</a></li>
+        <li class="d-inline-block"><a routerLink="/comics">Comics</a></li>
+      </ul>
+    </nav>
+    <div class="col-6">
+      <app-search></app-search>
+    </div>
+  </div>
+  <div *ngIf="resolving | async" class="card fixed-top bg-faded">
+    <h1 class="display-4 card-block text-center">
+      Loading something...
+    </h1>
+  </div>
+  <router-outlet></router-outlet>
+</div>
