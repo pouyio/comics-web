@@ -16,7 +16,7 @@ script:
   - npm run deploy
 
 after_success:
-  - angular-cli-ghpages --repo="https://$GH_TOKEN@github.com/pouyio/angular-http-demo.git" --name="pouyio" --email="pouyio@gmail.com"
+  - angular-cli-ghpages --repo="https://$GH_TOKEN@github.com/pouyio/comics.git" --name="pouyio" --email="pouyio@gmail.com"
 
 notifications:
   email:
