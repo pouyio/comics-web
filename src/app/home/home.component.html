@@ -1,0 +1,35 @@
+<h1 class="text-center">Read</h1>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let comic of comicsRead">
+    <span>
+      <i class="fa" [ngClass]="getCalendarIcon(comic.comic)"> </i>
+      {{comicsMap[comic.comic].attributes.publication_date}}
+      <a routerLink="/comic/{{comic.comic}}"> {{comicsMap[comic.comic].attributes.title}}</a>
+    </span>
+    <span class="badge badge-default m-1" *ngFor="let issue of comic.issues">
+      <a routerLink="/comic/{{getIssueLink(issuesMap[issue].links.self)}}" class="text-white">#{{issuesMap[issue].attributes.number === undefined? issuesMap[issue].attributes.title : issuesMap[issue].attributes.number}} </a>
+    </span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-6">
+      <h1 class="text-center">News</h1>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let new of news.news">
+          <a routerLink="/comic/{{new.id}}">{{new.attributes.title}}
+          <img class="img-fluid" style="max-height: 7em" [src]="new.links.cover" alt="cover"></a>
+        </li>
+      </ul>
+  </div>
+
+  <div class="col-6">
+    <h1 class="text-center">Updated</h1>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let update of news.updated">
+        <a routerLink="/comic/{{update.id}}">{{update.attributes.title}}
+        <img class="img-fluid" style="max-height: 7em" [src]="update.links.cover" alt="cover"></a>
+      </li>
+    </ul>
+  </div>
+</div>
