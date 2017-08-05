@@ -1,9 +1,7 @@
 import { Routes} from '@angular/router';
 import { ComicComponent } from './comic/comic.component';
 import { ComicIssueComponent } from './comic-issue/comic-issue.component';
-import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
-import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { LoginComponent } from './login/login.component';
 import { ComicIssueResolve } from './comic-issue-resolve';
 import { ComicsReadResolve } from './comics-read-resolve';
