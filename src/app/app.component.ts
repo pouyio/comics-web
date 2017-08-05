@@ -2,7 +2,7 @@ import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 import { ResolveService } from './resolve.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
@@ -14,9 +14,8 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  noBack = false;
-  logged = true;
-  resolving: Observable<boolean>;
+  logged: Boolean;
+  resolving: Observable<Boolean>;
   subscription: Subscription;
   location: Location;
 
@@ -28,18 +27,23 @@ export class AppComponent implements OnInit{
     private resolver: ResolveService,
     private cdRef :ChangeDetectorRef
   ) {
-    router.events.subscribe(params =>  this.noBack = (router.url === '/login'));
+    router.events.subscribe((params: NavigationEnd) =>  {
+      this.logged = params.url !== '/login';
+    });
     this.logged = !!this.auth.getToken();
-  }
-
-  logout = () => {
-    this.logged = false;
-    this.api.logout();
   }
 
   ngOnInit() {
     this.resolving = this.resolver.getState();
     this.cdRef.detectChanges();
   }
+
+  goBack = () => window.history.back();
+
+  logout = () => {
+    this.logged = false;
+    this.api.logout();
+  }
+
 
 }

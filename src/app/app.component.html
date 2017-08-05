@@ -1,19 +1,18 @@
 <div class="container-fluid">
-  <div class="row align-items-center">
-    <nav class="col-6">
+  <div class="row align-items-center" *ngIf="logged">
+    <nav class="col-sm-6">
       <ul class="p-0">
         <li class="d-inline-block">
-          <button type="button" class="btn btn-sm btn-secondary" (click)="location.back()" [hidden]="noBack">
+          <button type="button" class="btn btn-sm btn-secondary" (click)="goBack()">
             <i class="fa fa-angle-left"></i>
             Back
           </button>
         </li>
-        <li class="d-inline-block"><a routerLink="/login">Login</a></li>
-        <li class="d-inline-block"><a (click)="logout()">Logout</a></li>
+        <li class="d-inline-block btn-link"><a (click)="logout()">Logout</a></li>
         <li class="d-inline-block"><a routerLink="/comics">Comics</a></li>
       </ul>
     </nav>
-    <div class="col-6">
+    <div class="col-sm-6">
       <app-search></app-search>
     </div>
   </div>
