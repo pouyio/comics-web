@@ -7,8 +7,7 @@ export class AuthGuard implements CanActivate {
   constructor(@Inject(AuthService) private auth: AuthService, @Inject(Router) private router: Router) {}
 
   canActivate = () => {
-    let can = !!this.auth.getToken();
-    if(can) return true;
+    if(!!this.auth.getToken()) return true;
     this.router.navigate(['/login']);
   };
 

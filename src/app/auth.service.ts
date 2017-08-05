@@ -7,21 +7,21 @@ export class AuthService {
   private token: string;
 
   constructor(private router: Router) {
-    this.token = localStorage.getItem('currentUser');
+    this.token = localStorage.getItem('token');
  }
 
   getToken = (): string => {
     if(this.token) return this.token;
-    return localStorage.getItem('currentUser');
+    return localStorage.getItem('token');
   }
 
   setToken = (tk): void => {
-    localStorage.setItem('currentUser', tk);
+    localStorage.setItem('token', tk);
     this.token = tk;
   }
 
   removeToken = (): void => {
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
     this.token = '';
     this.router.navigate(['login']);
   }
