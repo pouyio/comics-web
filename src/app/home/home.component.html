@@ -6,7 +6,7 @@
       {{comicsMap[comic.comic].attributes.publication_date}}
       <a routerLink="/comic/{{comic.comic}}"> {{comicsMap[comic.comic].attributes.title}}</a>
     </span>
-    <span class="badge badge-default m-1" *ngFor="let issue of comic.issues">
+    <span class="badge badge-default m-1" *ngFor="let issue of comic.issues | orderBy: issue">
       <a routerLink="/comic/{{getIssueLink(issuesMap[issue].links.self)}}" class="text-white">#{{issuesMap[issue].attributes.number === undefined? issuesMap[issue].attributes.title : issuesMap[issue].attributes.number}} </a>
     </span>
   </li>

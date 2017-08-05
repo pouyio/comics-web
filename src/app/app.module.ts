@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { OrderModule } from 'ngx-order-pipe';
 
 import { AuthGuard } from './auth-guard';
 import { ApiService } from './api.service';
@@ -25,7 +26,6 @@ import { LoginComponent } from './login/login.component';
 import {HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
 import {AppRoutes} from './app.routes';
-import { NewsComponent } from './news/news.component';
 
 declare var Hammer: any;
 
@@ -48,14 +48,14 @@ export class MyHammerConfig extends HammerGestureConfig {
     SearchComponent,
     HomeComponent,
     ImageViewerComponent,
-    LoginComponent,
-    NewsComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    OrderModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(AppRoutes)
   ],
