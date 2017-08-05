@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   comicsMap: Array<any>;
   news: any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private api: ApiService) { }
 
   private _map = (acc: Array<any>, comic): Array<any> => {
     acc[comic.id] = comic;
@@ -33,6 +34,15 @@ export class HomeComponent implements OnInit {
       .map(c => c.data)
       .reduce((a, b) => a.concat(b), [])
       .reduce(this._map, {});
+  }
+
+  toggleComicWish(comic) {
+    let isWish = !comic.wish;
+    this.api.markComicWish(comic.comic || comic.id, isWish).subscribe(res => {
+      if(res.ok) {
+        comic.wish = isWish;
+      }
+    });
   }
 
   private getIssueLink = (self) => self.split('/').splice(self.split('/').length -2).join('/');

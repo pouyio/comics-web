@@ -29,4 +29,11 @@ export class SearchComponent {
     this.listed = Observable.merge(this.routeChangeO, this.typeAheadO);
   }
 
+  toggleComicWish(comic) {
+    let isWish = !comic.wish;
+    this.api.markComicWish(comic.id, isWish).subscribe(res => {
+      if (res.ok) comic.wish = isWish;
+    });
+  }
+
 }

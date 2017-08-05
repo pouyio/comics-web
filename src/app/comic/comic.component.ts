@@ -31,6 +31,13 @@ export class ComicComponent {
     });
   }
 
+  toggleComicWish() {
+    let isWish = !this.comic.wish;
+    this.api.markComicWish(this.comic.data.id, isWish).subscribe(res => {
+      if (res.ok) this.comic.wish = isWish;
+    });
+  }
+
   getIssueLink(link) {
     let arr = link.split('/');
     return arr[arr.length - 1];
