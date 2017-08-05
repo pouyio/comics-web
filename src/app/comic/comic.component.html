@@ -3,11 +3,11 @@
     <h1 class="col-12 display-4">{{comic.data.attributes.title}}</h1>
     <p class="col-12"><mark>{{comic.data.attributes.status}}.</mark> {{comic.data.attributes.summary}}</p>
 
-    <div class="col-4">
+    <div class="col-sm-4 col-6">
       <img class="img-fluid" [src]="comic.data.links.cover" alt="cover">
     </div>
 
-    <div class="col-4">
+    <div class="col-sm-4 col-6">
       <h2>Info</h2>
       <ul class="list-group">
         <li class="list-group-item">
@@ -22,9 +22,9 @@
       </ul>
     </div>
 
-    <div class="col-4">
+    <div class="col-sm-4">
       <div class="row">
-        <div class="col-12">
+        <div class="col-6 col-sm-12">
           <h2>Genres</h2>
           <ul class="list-group">
             <li class="list-group-item">
@@ -32,7 +32,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-12">
+        <div class="col-6 col-sm-12">
           <h2>Publication</h2>
           <ul class="list-group">
             <li class="list-group-item">
