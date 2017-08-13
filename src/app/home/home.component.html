@@ -3,13 +3,13 @@
   <li class="list-group-item" *ngFor="let comic of comicsRead">
     <span>
       <button class="btn btn-sm btn-outline-primary" routerLink="/comic/{{comic.comic}}">{{comicsMap[comic.comic].attributes.title}} </button>
-      <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-warning': 'btn-outline-warning'" (click)="toggleComicWish(comic)">Wish</button>
+      <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(comic)">Wish</button>
       <div>
         <i class="fa" [ngClass]="getCalendarIcon(comic.comic)"> </i>
         <span class="small">{{comicsMap[comic.comic].attributes.publication_date}}</span>
       </div>
     </span>
-    <span class="badge badge-default m-1" *ngFor="let issue of comic.issues | orderBy: issue">
+    <span class="badge badge-secondary m-1" *ngFor="let issue of comic.issues | orderBy: issue">
       <a routerLink="/comic/{{getIssueLink(issuesMap[issue].links.self)}}" class="text-white">#{{issuesMap[issue].attributes.number === undefined? issuesMap[issue].attributes.title : issuesMap[issue].attributes.number}} </a>
     </span>
   </li>
@@ -23,7 +23,7 @@
           <button class="btn btn-sm btn-outline-primary" routerLink="/comic/{{new.id}}">
             <img class="img-fluid" style="max-height: 7em" [src]="new.links.cover" alt="cover"> {{new.attributes.title}}
           </button>
-          <button type="button" class="btn btn-sm" [ngClass]="new.wish? 'btn-warning': 'btn-outline-warning'" (click)="toggleComicWish(new)">Wish</button>
+          <button type="button" class="btn btn-sm" [ngClass]="new.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(new)">Wish</button>
         </li>
       </ul>
   </div>
@@ -35,7 +35,7 @@
         <button class="btn btn-sm btn-outline-primary" routerLink="/comic/{{update.id}}">
           <img class="img-fluid" style="max-height: 7em" [src]="update.links.cover" alt="cover"> {{update.attributes.title}}
         </button>
-        <button type="button" class="btn btn-sm" [ngClass]="update.wish? 'btn-warning': 'btn-outline-warning'" (click)="toggleComicWish(update)">Wish</button>
+        <button type="button" class="btn btn-sm" [ngClass]="update.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(update)">Wish</button>
       </li>
     </ul>
   </div>

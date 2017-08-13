@@ -1,7 +1,7 @@
 <div *ngIf="comic && comic.data; else noAvailable">
   <div class="row">
     <h1 class="col-12 display-4">{{comic.data.attributes.title}}
-      <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-warning': 'btn-outline-warning'" (click)="toggleComicWish()">Wish</button>
+      <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish()">Wish</button>
     </h1>
     <p class="col-12"><mark>{{comic.data.attributes.status}}.</mark> {{comic.data.attributes.summary}}</p>
 
@@ -30,7 +30,7 @@
           <h2>Genres</h2>
           <ul class="list-group">
             <li class="list-group-item">
-              <span class="badge badge-default m-1" *ngFor="let genre of genres">{{genre.id}}</span>
+              <span class="badge badge-secondary m-1" *ngFor="let genre of genres">{{genre.id}}</span>
             </li>
           </ul>
         </div>
@@ -52,9 +52,9 @@
         <li class="list-group-item d-flex justify-content-between" *ngFor="let issue of issues; let i = index">
           <a routerLink="/comic/{{comic.data.id}}/{{getIssueLink(issue.links.self)}}">{{issue.attributes.title}}</a>
           <div class="">
-            <button (click)="downloadIssue(comic.data.id, getIssueLink(issue.links.self))" type="button" class="btn btn-sm btn-outline-danger" data-toggle="button" aria-pressed="false" autocomplete="off">
+            <!-- <button (click)="downloadIssue(comic.data.id, getIssueLink(issue.links.self))" type="button" class="btn btn-sm btn-outline-danger" data-toggle="button" aria-pressed="false" autocomplete="off">
             PDF
-          </button>
+          </button> -->
             <button [class.active]="issuesRead[issue.id]" type="button" class="btn btn-outline-primary btn-sm" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead(issue.id)">
             Read
           </button>

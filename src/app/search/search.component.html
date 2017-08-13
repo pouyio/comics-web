@@ -3,13 +3,13 @@
     <span class="input-group-btn">
       <button class="btn btn-sm btn-secondary" type="button" (click)="searchForm.reset()">Cancel</button>
     </span>
-    <input [formControl]="searchForm" type="text" class="form-control" (keyup.escape)="searchForm.reset()" placeholder="Search comic">
+    <input [formControl]="searchForm" type="text" class="form-control-label" (keyup.escape)="searchForm.reset()" placeholder="Search comic">
   </div>
   <ul class="list-group d-flex flex-row flex-wrap" style="position:absolute; z-index:2; overflow-y: overlay; max-height: 90vh">
     <li *ngFor="let item of listed | async" class="list-group-item d-flex justify-content-between">
       <img style="width:4em" class="img-fluid" [src]="item.links.cover" alt="cover">
       <a routerLink="/comic/{{item.id}}">{{item.attributes.title}}</a>
-      <button type="button" class="btn btn-sm" [ngClass]="item.wish? 'btn-warning': 'btn-outline-warning'" (click)="toggleComicWish(item)">Wish</button>
+      <button type="button" class="btn btn-sm" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
       <div>
         <span>{{item.attributes.completed ? 'Complete': 'Ongoing'}}</span>
         <small>{{item.attributes.summary}}</small>
