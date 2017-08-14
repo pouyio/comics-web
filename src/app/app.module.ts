@@ -23,22 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { LoginComponent } from './login/login.component';
 
-import {HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-
 import {AppRoutes} from './app.routes';
-
-declare var Hammer: any;
-
-export class MyHammerConfig extends HammerGestureConfig {
-  buildHammer(element: HTMLElement) {
-    let mc = new Hammer(element, {
-      touchAction: "auto",
-    });
-
-    // mc.get('pinch').set({enable: true});
-    return mc;
-  }
-}
 
 @NgModule({
   declarations: [
@@ -66,8 +51,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ResolveService,
     ComicResolve,
     ComicsReadResolve,
-    ComicIssueResolve,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }
+    ComicIssueResolve
   ],
   bootstrap: [AppComponent]
 })
