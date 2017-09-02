@@ -58,7 +58,7 @@ export class ApiService extends BaseService {
   }
 
   markComicWish(comic: string, wish: boolean): Observable<any> {
-    return this.http.post(`${this.baseUrl}/comic/wish/${comic}`, {wish}, this.getOptions()).catch(this.handleError);
+    return this.http.post(`${this.baseUrl}/comic/${comic}`, {wish}, this.getOptions()).catch(this.handleError);
   }
 
   search(query: string): Observable <any[]> {

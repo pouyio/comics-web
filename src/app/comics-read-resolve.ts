@@ -12,9 +12,9 @@ export class ComicsReadResolve implements Resolve<any> {
     const readShared$: Observable<any> = this.api.getComicsRead().share();
 
     const comics$: Observable<any> = readShared$.switchMap(cs => {
-      return cs.length ? Observable.forkJoin(...cs.map(c => this.api.getComic(c.comic))) : Observable.of([]);
+      return cs.length ? Observable.forkJoin(...cs.map(c => this.api.getComic(c._id))) : Observable.of([]);
     });
 
-    return Observable.forkJoin(readShared$, this.api.getNews(), comics$);
+    return Observable.forkJoin(readShared$, comics$);
   };
 }
