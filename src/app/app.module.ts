@@ -25,6 +25,7 @@ import { LoginComponent } from './login/login.component';
 
 import {AppRoutes} from './app.routes';
 import { HomeItemComponent } from './home/home-item/home-item.component';
+import { ComicPresentationComponent } from './comic/comic-presentation/comic-presentation.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HomeItemComponent } from './home/home-item/home-item.component';
     HomeComponent,
     ImageViewerComponent,
     LoginComponent,
-    HomeItemComponent
+    HomeItemComponent,
+    ComicPresentationComponent
   ],
   imports: [
     BrowserModule,

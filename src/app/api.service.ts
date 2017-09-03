@@ -53,8 +53,8 @@ export class ApiService extends BaseService {
       }).catch(this.handleError);
   }
 
-  markIssueRead(comic: string, issue: string, isRead: boolean): Observable<any> {
-    return this.http.post(`${this.baseUrl}/comic/${comic}`, { issue: issue, read: isRead }, this.getOptions()).catch(this.handleError);
+  updateIssue(comic: string, issue: string, status: object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/comic/${comic}/${issue}`, status, this.getOptions()).catch(this.handleError);
   }
 
   markComicWish(comic: string, wish: boolean): Observable<any> {
