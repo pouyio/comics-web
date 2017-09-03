@@ -1,0 +1,14 @@
+<div>
+  <button class="btn btn-sm btn-outline-primary" routerLink="['comic', comic._id]">{{comicsMap.get(comic._id).attributes.title}} </button>
+  <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleButton.emit(comic)">Wish</button>
+  <div>
+    <i class="fa" [ngClass]="getCalendarIcon(comic._id)"> </i>
+    <span class="small">{{comicsMap.get(comic._id).attributes.publication_date}}</span>
+  </div>
+</div>
+<div>
+  <span class="badge badge-secondary m-1" *ngFor="let issue of getIssues(comic)">
+  <a class="text-white">#{{getIssue(comic._id, issue).attributes.number}} </a>
+  <span>{{getPercentagePages(comic, issue)}}%</span>
+  </span>
+</div>

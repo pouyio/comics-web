@@ -24,6 +24,7 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { LoginComponent } from './login/login.component';
 
 import {AppRoutes} from './app.routes';
+import { HomeItemComponent } from './home/home-item/home-item.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {AppRoutes} from './app.routes';
     SearchComponent,
     HomeComponent,
     ImageViewerComponent,
-    LoginComponent
+    LoginComponent,
+    HomeItemComponent
   ],
   imports: [
     BrowserModule,
