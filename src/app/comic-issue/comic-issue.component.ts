@@ -17,7 +17,7 @@ export class ComicIssueComponent implements OnInit {
 
   ngOnInit() {
     this.issue = this.route.snapshot.data['issue'];
-    this.lastPage = this.issue.attributes.pages.length - 1;
+    this.lastPage = this.issue.pages.length - 1;
   }
 
   onSwiped(e) {

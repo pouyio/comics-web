@@ -12,7 +12,7 @@ export class AuthService {
 
   getToken = (): string => {
     if(this.token) return this.token;
-    return localStorage.getItem('token');
+    return localStorage.getItem('token') || '';
   }
 
   setToken = (tk): void => {

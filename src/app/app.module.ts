@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrderModule } from 'ngx-order-pipe';
+import { Interceptor } from './interceptor';
 
 import { AuthGuard } from './auth-guard';
 import { ApiService } from './api.service';
@@ -26,6 +27,7 @@ import { LoginComponent } from './login/login.component';
 import {AppRoutes} from './app.routes';
 import { HomeItemComponent } from './home/home-item/home-item.component';
 import { ComicPresentationComponent } from './comic/comic-presentation/comic-presentation.component';
+import { IssuePresentationComponent } from './comic-issue/issue-presentation/issue-presentation.component';
 
 @NgModule({
   declarations: [
@@ -37,16 +39,17 @@ import { ComicPresentationComponent } from './comic/comic-presentation/comic-pre
     ImageViewerComponent,
     LoginComponent,
     HomeItemComponent,
-    ComicPresentationComponent
+    ComicPresentationComponent,
+    IssuePresentationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     OrderModule,
-    NgbModule.forRoot(),
-    RouterModule.forRoot(AppRoutes)
+    // NgbModule.forRoot(),
+    RouterModule.forRoot(AppRoutes),
   ],
   providers: [
     AuthService,
@@ -55,7 +58,12 @@ import { ComicPresentationComponent } from './comic/comic-presentation/comic-pre
     ResolveService,
     ComicResolve,
     ComicsReadResolve,
-    ComicIssueResolve
+    ComicIssueResolve,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })
