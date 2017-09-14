@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ResponseContentType} from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ResolveService } from './resolve.service';
 import { Observable } from 'rxjs/Rx';
 import { BaseService } from './base.service';
@@ -58,8 +58,10 @@ export class ApiService extends BaseService {
     return this.http.post(`${this.baseUrl}/comic/${comic}`, {wish}).catch(this.handleError);
   }
 
-  search(query: string): Observable <any[]> {
-    return (this.http.get(`${this.baseUrl}/comics/search/${encodeURI(query)}`).catch(this.handleError));
+  search(query: string, exact = false): Observable <any[]> {
+    const params = new HttpParams().set('query', encodeURI(query));
+    if(exact) params.set('exact', '1');
+    return (this.http.get(`${this.baseUrl}/comics/search`, {params: params}).catch(this.handleError));
   }
 
   getImage(url: string) {
