@@ -7,7 +7,7 @@
   </div>
   <ul class="list-group d-flex flex-row flex-wrap" style="position:absolute; z-index:2; overflow-y: overlay; max-height: 90vh">
     <li *ngFor="let item of listed | async" class="list-group-item d-flex justify-content-between">
-      <img style="width:4em" class="img-fluid" [src]="item.cover" alt="cover">
+      <img style="width:4em" class="img-fluid" src="http://ec2-52-57-163-72.eu-central-1.compute.amazonaws.com:8080{{item.cover}}" alt="cover">
       <a [routerLink]="['/comic', item._id]">{{item.attributes.title}}</a>
       <button type="button" class="btn btn-sm" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
       <div>
