@@ -16,7 +16,7 @@ export class IssuePresentationComponent implements OnInit {
 
   ngOnInit() {
     if(this.issue) {
-      this.page = this.issue.info.page;
+      this.page = this.issue.info.page | 0;
       this.lastPage = this.issue.pages.length - 1;
     }
   }
