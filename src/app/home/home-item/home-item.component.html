@@ -7,8 +7,15 @@
   </div>
 </div>
 <div>
-  <span class="badge badge-secondary m-1" *ngFor="let issue of getIssues(comic)">
-  <a class="text-white">#{{getIssue(comic._id, issue).attributes.number}} </a>
-  <span>{{getPercentagePages(comic, issue)}}%</span>
+  <span *ngFor="let issue of getIssues(comic)">
+    <a [routerLink]="['/comic', comic._id, issue]" *ngIf="getPercentagePages(comic, issue) || comic[issue].read">
+      <span class="badge m-1" [ngClass]="[comic[issue].read ? 'badge-primary': 'badge-secondary']">
+        <a class="text-white">#{{getIssue(comic._id, issue).attributes.number}} </a>
+        <span *ngIf="!comic[issue].read; else completed">{{getPercentagePages(comic, issue)}}%</span>
+        <ng-template #completed>
+          <span>complete</span>
+        </ng-template>
+      </span>
+    </a>
   </span>
 </div>
