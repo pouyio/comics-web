@@ -33,13 +33,13 @@ export class ComicPresentationComponent implements OnInit {
     return this.filterInfo('issues').sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' }));
   }
 
-  getPercentagePages = (issue) => Math.round((this.comic.included.find(i => i.id === issue.id).page / this._getTotalPages(issue))* 100);
+  getPercentagePages = (issue) => Math.round((this.comic.included.find(i => i.id === issue.id).page / this.getTotalPages(issue))* 100);
 
   filterInfo = (type): any[] => this.comic.included.filter(i => i.type === type);
 
-  private _getTotalPages = (issue) => {
+  getTotalPages = (issue) => {
     const a = this.comic.included.find(i => i.id === issue.id).pages;
-    return a ? a.length : 0.01;
+    return a ? a.length - 1 : 0.01;
   }
 
 }
