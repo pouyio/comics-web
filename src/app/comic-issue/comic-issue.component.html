@@ -1,14 +1,1 @@
-<div class="m-auto" style="width:60%">
-  <app-image-viewer (onSwiped)="onSwiped($event)" [img]="issue.attributes.pages[page]"></app-image-viewer>
-</div>
-
-<div class="row">
-  <div class="col-6">
-    <input style="width:100%" type="range" name="pages" min="0" max="{{issue.attributes.pages.length - 1}}" [(ngModel)]="page">
-  </div>
-
-  <div class="btn-group col-6">
-    <button type="button" class="btn btn-secondary" (click)="page = page-1" [disabled]="page === 0">prev</button>
-    <button type="button" class="btn btn-secondary" (click)="page = page+1" [disabled]="page === lastPage">next</button>
-  </div>
-</div>
+<app-issue-presentation [issue]="issue" (pageRead)="updatePage($event)"><app-issue-presentation>

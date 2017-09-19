@@ -1,0 +1,62 @@
+<div class="row">
+  <h1 class="col-12 display-4 text-center">{{comic.attributes.title}}
+    <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleWish.emit()">Following <i class="fa" [ngClass]="[comic.wish ? 'fa-clock-o': '']"></i></button>
+  </h1>
+  <p class="col-12"><mark>{{comic.attributes.status}}.</mark> {{comic.attributes.summary}}</p>
+
+  <div class="col-sm-4 col-6">
+    <img class="img-fluid" [src]="comic.cover" alt="cover">
+  </div>
+
+  <div class="col-sm-4 col-6">
+    <h2 class="text-center">Info</h2>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Artist</strong>: {{extractInfo('artists')}}
+      </li>
+      <li class="list-group-item">
+        <strong>Publisher</strong>: {{extractInfo('publishers')}}
+      </li>
+      <li class="list-group-item">
+        <strong>Writer</strong>: {{extractInfo('writers')}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="row">
+      <div class="col-6 col-sm-12">
+        <h2 class="text-center">Genres</h2>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <span class="badge badge-secondary m-1" *ngFor="let genre of filterInfo('genres')">{{genre.id}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 col-sm-12">
+        <h2 class="text-center">Publication</h2>
+        <ul class="list-group">
+          <li class="list-group-item">
+            {{comic.attributes.publication_date}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center">Issues</h2>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between" *ngFor="let issue of getIssues()">
+        <a [routerLink]="['/comic', comic._id, issue.id]">{{issue.attributes.title}}</a>
+        <button [class.active]="issue.read" type="button" class="btn btn-outline-primary btn-sm" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead.emit({issue: issue.id, val: !issue.read})">
+          Read <i class="fa" [ngClass]="issue.read ? 'fa-check': ''"></i>
+        </button>
+        <progress [value]="getPercentagePages(issue)" max="100"></progress>
+      </li>
+    </ul>
+  </div>
+</div>

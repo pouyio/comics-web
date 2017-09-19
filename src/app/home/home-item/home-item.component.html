@@ -1,0 +1,21 @@
+<div>
+  <button class="btn btn-sm btn-outline-primary" [routerLink]="['/comic', comic._id]">{{comicsMap.get(comic._id).attributes.title}} </button>
+  <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleButton.emit(comic)">Following <i class="fa" [ngClass]="[comic.wish ? 'fa-clock-o': '']"></i></button>
+  <span>
+    <i class="fa" [ngClass]="getCalendarIcon(comic._id)"> </i>
+    <span class="small">{{comicsMap.get(comic._id).attributes.publication_date}}</span>
+  </span>
+</div>
+<div>
+  <span *ngFor="let issue of getIssues(comic)">
+    <a [routerLink]="['/comic', comic._id, issue]" *ngIf="getPercentagePages(comic, issue) || comic[issue].read">
+      <span class="badge m-1" [ngClass]="[comic[issue].read ? 'badge-primary': 'badge-secondary']">
+        <a class="text-white">#{{getIssueNumber(comic._id, issue)}} </a>
+        <span *ngIf="!comic[issue].read; else completed">{{getPercentagePages(comic, issue)}}%</span>
+        <ng-template #completed>
+          <i class="fa fa-check-circle"></i>
+        </ng-template>
+      </span>
+    </a>
+  </span>
+</div>

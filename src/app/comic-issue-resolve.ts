@@ -10,8 +10,6 @@ export class ComicIssueResolve implements Resolve<any> {
   constructor(private api: ApiService, private resolver: ResolveService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    let id = route.paramMap.get('id');
-    let iss = route.paramMap.get('issue');
-    return this.api.getComicIssue(id, iss).map(i => i.data)
+    return this.api.getComicIssue(route.paramMap.get('id'), route.paramMap.get('issue'));
   }
 }

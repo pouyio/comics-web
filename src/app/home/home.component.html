@@ -1,21 +1,11 @@
-<h1 class="text-center">Read & Wished</h1>
+<h1 class="text-center">My Collection</h1>
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let comic of comicsRead">
-    <span>
-      <button class="btn btn-sm btn-outline-primary" routerLink="/comic/{{comic.comic}}">{{comicsMap[comic.comic].attributes.title}} </button>
-      <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(comic)">Wish</button>
-      <div>
-        <i class="fa" [ngClass]="getCalendarIcon(comic.comic)"> </i>
-        <span class="small">{{comicsMap[comic.comic].attributes.publication_date}}</span>
-      </div>
-    </span>
-    <span class="badge badge-secondary m-1" *ngFor="let issue of comic.issues | orderBy: issue">
-      <a routerLink="/comic/{{getIssueLink(issuesMap[issue].links.self)}}" class="text-white">#{{issuesMap[issue].attributes.number === undefined? issuesMap[issue].attributes.title : issuesMap[issue].attributes.number}} </a>
-    </span>
+    <app-home-item [comic]="comic" [comicsMap]="issuesMap" (toggleButton)="toggleComicWish($event)"></app-home-item>
   </li>
 </ul>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-6">
       <h1 class="text-center">News</h1>
       <ul class="list-group">
@@ -39,4 +29,4 @@
       </li>
     </ul>
   </div>
-</div>
+</div> -->

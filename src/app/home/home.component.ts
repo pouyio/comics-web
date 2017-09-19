@@ -11,44 +11,21 @@ export class HomeComponent implements OnInit {
 
   comicsRead: Array<any>;
   fullComics: Array<any>;
-  issuesMap: Array<any>;
-  comicsMap: Array<any>;
-  news: any;
+  issuesMap: Map<any, any>;
 
   constructor(private route: ActivatedRoute, private api: ApiService) { }
 
-  private _map = (acc: Array<any>, comic): Array<any> => {
-    acc[comic.id] = comic;
-    return acc;
-  }
-
   ngOnInit() {
-    [this.comicsRead, this.news, this.fullComics] = this.route.snapshot.data['comics'];
-    this.issuesMap = this.fullComics
-      .map(c => c.included)
-      .reduce((a, b) => a.concat(b), [])
-      .filter(c => c.type === 'issues')
-      .reduce(this._map, {});
-
-    this.comicsMap = this.fullComics
-      .map(c => c.data)
-      .reduce((a, b) => a.concat(b), [])
-      .reduce(this._map, {});
+    [this.comicsRead, this.fullComics] = this.route.snapshot.data['comics'];
+    const a: any[] = this.fullComics.map((c:any) => [c._id, c]);
+    this.issuesMap = new Map(a);
   }
 
-  toggleComicWish(comic) {
-    let isWish = !comic.wish;
-    this.api.markComicWish(comic.comic || comic.id, isWish).subscribe(res => {
-      if(res.ok) {
-        comic.wish = isWish;
-      }
+  toggleComicWish = (comic) => {
+    const isWish = !comic.wish;
+    this.api.markComicWish(comic._id, isWish).subscribe(res => {
+      if(res.ok) comic.wish = isWish;
     });
-  }
-
-  private getIssueLink = (self) => self.split('/').splice(self.split('/').length -2).join('/');
-
-  private getCalendarIcon = (comicId) => {
-    return this.comicsMap[comicId].attributes.status == 'Completed' ? 'fa-calendar-plus-o': 'fa-calendar-o'
   }
 
 }
