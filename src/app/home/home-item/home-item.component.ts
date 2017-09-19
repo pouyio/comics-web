@@ -23,9 +23,14 @@ export class HomeItemComponent {
     return this.comicsMap.get(comicId).attributes.status == 'Completed' ? 'fa-calendar-plus-o': 'fa-calendar-o';
   }
 
+  getIssueNumber = (comicId, issue) => {
+    const attr = this.getIssue(comicId, issue).attributes;
+    return attr.number ? attr.number: attr.title;
+  }
+
   private _getTotalPages = (comic, issue) => {
     const a = this.getIssue(comic._id, issue).pages;
-    return a ? a.length : 0.01;
+    return a ? a.length - 1 : 0.01;
   }
 
 }

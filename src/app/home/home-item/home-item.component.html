@@ -10,10 +10,10 @@
   <span *ngFor="let issue of getIssues(comic)">
     <a [routerLink]="['/comic', comic._id, issue]" *ngIf="getPercentagePages(comic, issue) || comic[issue].read">
       <span class="badge m-1" [ngClass]="[comic[issue].read ? 'badge-primary': 'badge-secondary']">
-        <a class="text-white">#{{getIssue(comic._id, issue).attributes.number}} </a>
+        <a class="text-white">#{{getIssueNumber(comic._id, issue)}} </a>
         <span *ngIf="!comic[issue].read; else completed">{{getPercentagePages(comic, issue)}}%</span>
         <ng-template #completed>
-          <span>complete</span>
+          <i class="fa fa-check-circle"></i>
         </ng-template>
       </span>
     </a>
