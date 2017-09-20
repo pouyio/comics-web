@@ -31,7 +31,7 @@ export class SearchComponent {
 
   toggleComicWish(comic) {
     let isWish = !comic.wish;
-    this.api.markComicWish(comic.id, isWish).subscribe(res => {
+    this.api.markComicWish(comic._id, isWish).subscribe(res => {
       if (res.ok) comic.wish = isWish;
     });
   }
