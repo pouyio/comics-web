@@ -1,10 +1,17 @@
-<div class="row justify-content-center my-5">
-  <div class="col-sm-6">
-    <div class="input-group">
-      <input type="password" autocapitalize="none" class="form-control" (keyup.enter)="login(user)" placeholder="User" [(ngModel)]="user">
-      <span class="input-group-btn">
-        <button class="btn btn-primary" type="button" (click)="login(user)">Login</button>
-      </span>
+<section class="hero is-dark is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+
+      <div class="field has-addons is-horizontal">
+
+        <div style="width: 100%" class="control">
+          <input class="input" type="password" (keyup.enter)="login(user)" placeholder="User" [(ngModel)]="user">
+        </div>
+        <div class="control">
+          <a class="button is-white is-outlined" (click)="login(user)">Login</a>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
+</section>

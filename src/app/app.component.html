@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row align-items-center" *ngIf="logged">
     <nav class="col-sm-6">
       <ul class="p-0">
@@ -16,10 +16,35 @@
       <app-search></app-search>
     </div>
   </div>
+  <router-outlet></router-outlet>
   <div *ngIf="resolving | async" class="card fixed-top bg-faded">
     <h1 class="display-4 card-block text-center">
       Loading something...
     </h1>
   </div>
-  <router-outlet></router-outlet>
-</div>
+</div> -->
+<nav *ngIf="logged" style="position: fixed; width: 100%; z-index: 1" class="navbar is-dark" role="navigation" aria-label="main navigation">
+
+  <div class="navbar-brand">
+    <a class="navbar-item is-size-4 has-text-weight-light" routerLink="/comics" [routerLinkActive]="['is-active']">📚 Home</a>
+    <div class="navbar-burger burger" (click)="isActive = !isActive">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div [ngClass]="{'is-active': isActive}" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <app-search></app-search>
+      </div>
+      <a class="navbar-item" (click)="logout()"> ❌ Logout</a>
+    </div>
+  </div>
+</nav>
+
+<nav *ngIf="logged" class="navbar">
+</nav>
+
+<router-outlet></router-outlet>

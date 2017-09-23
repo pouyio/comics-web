@@ -1,29 +1,52 @@
-<div class="row">
-  <h1 class="col-12 display-4 text-center">{{comic.attributes.title}}
-    <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleWish.emit()">Following <i class="fa" [ngClass]="[comic.wish ? 'fa-clock-o': '']"></i></button>
-  </h1>
-  <p class="col-12"><mark>{{comic.attributes.status}}.</mark> {{comic.attributes.summary}}</p>
+<section class="hero is-dark is-bold">
+  <div class="hero-body">
+    <div class="container">
 
-  <div class="col-sm-4 col-6">
-    <img class="img-fluid" [src]="comic.cover" alt="cover">
+      <h1 class="title has-text-centered">
+        {{comic.attributes.title}}
+      </h1>
+
+      <h2 class="subtitle has-text-left is-flex" style="justify-content: space-between">
+        <div class="is-inline" (click)="toggleWish.emit()">
+          <input type="checkbox" name="switchRoundedDefault" class="switch is-rounded" [checked]="comic.wish" >
+          <label for="switchRoundedDefault">{{comic.wish ? 'Following': 'Follow'}}</label>
+        </div>
+        <span class="tag is-rounded" [ngClass]="comic.attributes.status === 'Completed' ? 'is-primary': 'is-warning'">✈️ {{comic.attributes.status}}</span>
+      </h2>
+
+    </div>
   </div>
+</section>
 
-  <div class="col-sm-4 col-6">
-    <h2 class="text-center">Info</h2>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <strong>Artist</strong>: {{extractInfo('artists')}}
-      </li>
-      <li class="list-group-item">
-        <strong>Publisher</strong>: {{extractInfo('publishers')}}
-      </li>
-      <li class="list-group-item">
-        <strong>Writer</strong>: {{extractInfo('writers')}}
-      </li>
-    </ul>
-  </div>
+<section class="section">
 
-  <div class="col-sm-4">
+  <div class="container-fluid">
+    <span>
+      📅 {{comic.attributes.publication_date}}
+    </span>
+
+    <p class="col-12">{{comic.attributes.summary}}</p>
+
+    <div class="col-sm-4 col-6">
+      <img class="img-fluid" [src]="comic.cover" alt="cover">
+    </div>
+
+    <div class="col-sm-4 col-6">
+      <h2 class="text-center">Info</h2>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Artist</strong>: {{extractInfo('artists')}}
+        </li>
+        <li class="list-group-item">
+          <strong>Publisher</strong>: {{extractInfo('publishers')}}
+        </li>
+        <li class="list-group-item">
+          <strong>Writer</strong>: {{extractInfo('writers')}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-sm-4">
     <div class="row">
       <div class="col-6 col-sm-12">
         <h2 class="text-center">Genres</h2>
@@ -43,8 +66,9 @@
       </div>
     </div>
   </div>
+  </div>
 
-</div>
+</section>
 
 <div class="row">
   <div class="col-12">

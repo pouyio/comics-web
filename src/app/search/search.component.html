@@ -1,7 +1,35 @@
-<div class="form-group">
+<div class="field has-addons is-marginless">
+  <div class="control">
+    <a class="button is-small is-light is-outlined" (click)="searchForm.reset()">
+      Cancel
+    </a>
+  </div>
+  <div class="control">
+    <input [formControl]="searchForm" (keyup.escape)="searchForm.reset()" [class.is-danger]="searchForm.value && searchForm.value.length <= 3" class="input is-small" type="text" placeholder="Search comic">
+  </div>
+</div>
+
+<ul class="" style="position:absolute; z-index:2; overflow-y: overlay; max-height: 90vh">
+  <li *ngFor="let item of listed | async" class="">
+    <img style="width:4em; max-height: 6em" class="" [src]="item.cover" alt="cover">
+    <a [routerLink]="['/comic', item._id]">{{item.attributes.title}}</a>
+    <button type="button" class="button" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
+    <div>
+      <span>{{item.attributes.completed ? 'Complete': 'Ongoing'}}</span>
+      <small>{{item.attributes.summary}}</small>
+    </div>
+  </li>
+
+  <li *ngIf="loading" class="">
+    Loading ...
+  </li>
+
+</ul>
+
+<!-- <div class="form-group">
   <div [class.has-danger]="searchForm.value && searchForm.value.length <= 3" class="input-group">
     <span class="input-group-btn">
-      <button class="btn btn-sm btn-secondary" type="button" (click)="searchForm.reset()">Cancel</button>
+      <button class="button btn btn-sm btn-secondary" type="button" (click)="searchForm.reset()">Cancel</button>
     </span>
     <input [formControl]="searchForm" type="text" class="form-control-label" (keyup.escape)="searchForm.reset()" placeholder="Search comic">
   </div>
@@ -19,4 +47,4 @@
       Loading ...
     </li>
   </ul>
-</div>
+</div> -->

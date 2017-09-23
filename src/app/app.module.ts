@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-// import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrderModule } from 'ngx-order-pipe';
 import { Interceptor } from './interceptor';
 
@@ -48,7 +47,6 @@ import { IssuePresentationComponent } from './comic-issue/issue-presentation/iss
     ReactiveFormsModule,
     HttpClientModule,
     OrderModule,
-    // NgbModule.forRoot(),
     RouterModule.forRoot(AppRoutes),
   ],
   providers: [
