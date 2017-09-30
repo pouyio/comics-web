@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
   resolving: Observable<Boolean>;
   subscription: Subscription;
   location: Location;
+  breadcrumbs: any[] = [];
 
   constructor(
     location: Location,
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit{
   ) {
     router.events.subscribe((params: NavigationEnd) =>  {
       this.logged = params.url !== '/login';
+      this.breadcrumbs = params.url.split('/').slice(2);
     });
     this.logged = !!this.auth.getToken();
   }
@@ -38,7 +40,19 @@ export class AppComponent implements OnInit{
     this.cdRef.detectChanges();
   }
 
-  goBack = () => window.history.back();
+  getBreadcrumbs = (breadcrumbs) => {
+    return breadcrumbs.reduce((acc, title) => {
+      let url = '';
+      if(!acc.length) {
+        url = `/comic/${title}`;
+      } else {
+        url = `${acc[acc.length -1].url}/${title}`;
+      }
+      const obj = {url, title};
+      acc.push(obj)
+      return acc;
+    }, []);
+  }
 
   logout = () => {
     this.logged = false;

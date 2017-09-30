@@ -5,8 +5,9 @@
       <label for="switchExample"></label>
     </div>
 
-    <small><i class="fa" [ngClass]="getCalendarIcon(comic._id)"></i>
-    <span class="small">{{comicsMap.get(comic._id).attributes.publication_date}}</span></small>
+    <small>
+      <span class="small">✈️ {{comicsMap.get(comic._id).attributes.status}}</span>
+    </small>
     <h1 style="font-size: 1.1em" class="has-text-weight-bold" >{{comicsMap.get(comic._id).attributes.title}}</h1>
 
       <!-- <div *ngFor="let issue of getIssues(comic)">

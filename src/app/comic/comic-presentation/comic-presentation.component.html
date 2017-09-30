@@ -6,7 +6,7 @@
         {{comic.attributes.title}}
       </h1>
 
-      <h2 class="subtitle has-text-left is-flex" style="justify-content: space-between">
+      <h2 class="is-flex" style="justify-content: space-between">
         <div class="is-inline" (click)="toggleWish.emit()">
           <input type="checkbox" name="switchRoundedDefault" class="switch is-rounded" [checked]="comic.wish" >
           <label for="switchRoundedDefault">{{comic.wish ? 'Following': 'Follow'}}</label>
