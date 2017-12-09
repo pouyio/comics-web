@@ -9,14 +9,14 @@
   </div>
 </div>
 
-<ul class="" style="position:absolute; z-index:2; overflow-y: overlay; max-height: 90vh">
+<ul class="container" style="position:absolute; z-index:2; overflow-y: auto; max-height: 90vh">
   <li *ngFor="let item of listed | async" class="">
     <img style="width:4em; max-height: 6em" class="" [src]="item.cover" alt="cover">
     <a [routerLink]="['/comic', item._id]">{{item.attributes.title}}</a>
     <button type="button" class="button" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
     <div>
       <span>{{item.attributes.completed ? 'Complete': 'Ongoing'}}</span>
-      <small>{{item.attributes.summary}}</small>
+      <small>{{limit(item.attributes.summary, 100)}}</small>
     </div>
   </li>
 
@@ -25,26 +25,3 @@
   </li>
 
 </ul>
-
-<!-- <div class="form-group">
-  <div [class.has-danger]="searchForm.value && searchForm.value.length <= 3" class="input-group">
-    <span class="input-group-btn">
-      <button class="button btn btn-sm btn-secondary" type="button" (click)="searchForm.reset()">Cancel</button>
-    </span>
-    <input [formControl]="searchForm" type="text" class="form-control-label" (keyup.escape)="searchForm.reset()" placeholder="Search comic">
-  </div>
-  <ul class="list-group d-flex flex-row flex-wrap" style="position:absolute; z-index:2; overflow-y: overlay; max-height: 90vh">
-    <li *ngFor="let item of listed | async" class="list-group-item d-flex justify-content-between">
-      <img style="width:4em; max-height: 6em" class="img-fluid" [src]="item.cover" alt="cover">
-      <a [routerLink]="['/comic', item._id]">{{item.attributes.title}}</a>
-      <button type="button" class="btn btn-sm" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
-      <div>
-        <span>{{item.attributes.completed ? 'Complete': 'Ongoing'}}</span>
-        <small>{{item.attributes.summary}}</small>
-      </div>
-    </li>
-    <li *ngIf="loading" class="list-group-item d-flex justify-content-between">
-      Loading ...
-    </li>
-  </ul>
-</div> -->
