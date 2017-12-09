@@ -6,14 +6,16 @@
     <input [formControl]="searchForm" type="text" class="form-control-label" (keyup.escape)="searchForm.reset()" placeholder="Search comic">
   </div>
   <ul class="list-group d-flex flex-row flex-wrap" style="position:absolute; z-index:2; overflow-y: overlay; max-height: 90vh">
-    <li *ngFor="let item of listed | async" class="list-group-item d-flex justify-content-between">
-      <img style="width:4em; max-height: 6em" class="img-fluid" [src]="item.cover" alt="cover">
+    <li *ngFor="let item of listed | async" class="list-group-item ">
       <a [routerLink]="['/comic', item._id]">{{item.attributes.title}}</a>
-      <button type="button" class="btn btn-sm" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
-      <div>
-        <span>{{item.attributes.completed ? 'Complete': 'Ongoing'}}</span>
-        <small>{{item.attributes.summary}}</small>
-      </div>
+      <span class="d-flex justify-content-between">
+        <img style="width:4em; max-height: 6em" class="img-fluid" [src]="item.cover" alt="cover">
+        <button type="button" class="btn btn-sm" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
+        <div>
+          <span>{{item.attributes.completed ? 'Complete': 'Ongoing'}}</span>
+          <small>{{limit(item.attributes.summary, 100)}}</small>
+        </div>
+      </span>
     </li>
     <li *ngIf="loading" class="list-group-item d-flex justify-content-between">
       Loading ...
