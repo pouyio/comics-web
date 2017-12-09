@@ -9,9 +9,8 @@ import { ResolveService } from './resolve.service';
 @Injectable()
 export class BaseService {
 
-  // protected baseUrl: string = 'http://192.168.1.34:8080';
   // protected baseUrl: string = 'http://localhost:8080';
-  protected baseUrl: string = 'http://ec2-52-57-163-72.eu-central-1.compute.amazonaws.com:8080';
+  protected baseUrl: string = 'https://comic.vicenteortiz.me';
 
   constructor(protected http: HttpClient, protected auth: AuthService, protected resolver: ResolveService) {}
 
