@@ -10,7 +10,7 @@ import { ResolveService } from './resolve.service';
 export class BaseService {
 
   // protected baseUrl: string = 'http://192.168.1.33:8080';
-  protected baseUrl: string = 'https://comic.vicenteortiz.me/comic-api';
+  protected baseUrl: string = 'https://comic.vicenteortiz.me:8081';
 
   constructor(protected http: HttpClient, protected auth: AuthService, protected resolver: ResolveService) {}
 
