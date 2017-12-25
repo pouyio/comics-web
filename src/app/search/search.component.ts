@@ -6,7 +6,8 @@ import { Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html'
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
 
