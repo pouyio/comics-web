@@ -5,12 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthService } from './auth.service';
 import { ResolveService } from './resolve.service';
+import { environment } from 'environments/environment.prod';
 
 @Injectable()
 export class BaseService {
 
-  // protected baseUrl: string = 'http://192.168.1.33:8080';
-  protected baseUrl: string = 'https://comic.vicenteortiz.me:8081';
+  protected baseUrl: string = environment.api_url;
 
   constructor(protected http: HttpClient, protected auth: AuthService, protected resolver: ResolveService) {}
 
