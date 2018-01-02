@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthService } from './auth.service';
 import { ResolveService } from './resolve.service';
-import { environment } from 'environments/environment.prod';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class BaseService {
