@@ -22,4 +22,8 @@ export class ImageViewerComponent {
     this.onSwiped.emit(e);
   }
 
+  onLoaded() {
+    window.scroll({top: 0, behavior: 'smooth'});
+  }
+
 }
