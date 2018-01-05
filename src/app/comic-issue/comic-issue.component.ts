@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Params, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -11,10 +11,14 @@ export class ComicIssueComponent implements OnInit {
 
   issue: any;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {}
+  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.issue = this.route.snapshot.data['issue'];
+  }
+
+  onGoIssue() {
+    this.router.navigate(['/comic/', this.route.snapshot.params.id]);
   }
 
   updatePage = (page) => {

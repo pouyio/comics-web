@@ -9,6 +9,7 @@ export class IssuePresentationComponent implements OnInit {
 
   @Input() issue;
   @Output() pageRead = new EventEmitter();
+  @Output() onGoIssue = new EventEmitter();
   page: number = 0;
   lastPage: number = 0;
 
