@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api_url: 'http://localhost:4000/graphql',
+  rest_url: 'https://comic.vicenteortiz.me:8081'
 };

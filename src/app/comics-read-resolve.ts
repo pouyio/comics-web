@@ -15,6 +15,6 @@ export class ComicsReadResolve implements Resolve<any> {
       return cs.length ? Observable.forkJoin(...cs.map(c => this.api.getComic(c._id))) : Observable.of([]);
     });
 
-    return Observable.forkJoin(readShared$, comics$);
+    return Observable.of([]);
   };
 }

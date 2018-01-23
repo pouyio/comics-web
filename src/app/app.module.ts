@@ -23,10 +23,15 @@ import { HomeComponent } from './home/home.component';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 import { LoginComponent } from './login/login.component';
 
-import {AppRoutes} from './app.routes';
+import { AppRoutes } from './app.routes';
 import { HomeItemComponent } from './home/home-item/home-item.component';
 import { ComicPresentationComponent } from './comic/comic-presentation/comic-presentation.component';
 import { IssuePresentationComponent } from './comic-issue/issue-presentation/issue-presentation.component';
+
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { environment } from '../environments/environment';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 @NgModule({
   declarations: [
@@ -46,6 +51,8 @@ import { IssuePresentationComponent } from './comic-issue/issue-presentation/iss
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ApolloModule,
+    HttpLinkModule,
     OrderModule,
     RouterModule.forRoot(AppRoutes),
   ],
@@ -65,4 +72,11 @@ import { IssuePresentationComponent } from './comic-issue/issue-presentation/iss
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(apollo: Apollo, httpLink: HttpLink) {
+    apollo.create({
+      link: httpLink.create({ uri: environment.api_url }),
+      cache: new InMemoryCache()
+    });
+  }
+}

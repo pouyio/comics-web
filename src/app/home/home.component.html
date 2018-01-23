@@ -2,7 +2,7 @@
   <div class="hero-body">
     <div class="container has-text-centered">
       <h1 class="title">My Collection</h1>
-      <h2 class="subtitle">Following {{comicsRead.length}} comics</h2>
+      <h2 class="subtitle">Following {{($comics | async)?.length}} comics</h2>
     </div>
   </div>
 </section>
@@ -11,18 +11,10 @@
   <div class="container-fluid">
 
     <div class="columns is-mobile is-variable is-1 is-multiline is-centered">
-      <div class="column is-2-tablet is-one-quarter-mobile" *ngFor="let comic of comicsRead">
-        <app-home-item [comic]="comic" [comicsMap]="issuesMap" (toggleButton)="toggleComicWish($event)"></app-home-item>
+      <div class="column is-2-tablet is-one-quarter-mobile" *ngFor="let comic of $comics | async | select: 'comics'">
+        <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>
       </div>
-
-      <!-- <div class="column is-2-tablet is-one-quarter-mobile" *ngFor="let comic of comicsRead">
-        <app-home-item [comic]="comic" [comicsMap]="issuesMap" (toggleButton)="toggleComicWish($event)"></app-home-item>
-      </div>
-      <div class="column is-2-tablet is-one-quarter-mobile" *ngFor="let comic of comicsRead">
-        <app-home-item [comic]="comic" [comicsMap]="issuesMap" (toggleButton)="toggleComicWish($event)"></app-home-item>
-      </div> -->
-
     </div>
 
   </div>
-</section>
+</section> 

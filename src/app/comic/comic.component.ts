@@ -1,34 +1,109 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
+import { Apollo } from 'apollo-angular';
+import { ApolloQueryResult } from 'apollo-client';
+import gql from 'graphql-tag';
 
 @Component({
-  selector: 'app-comic',
-  templateUrl: './comic.component.html',
-  styleUrls: ['./comic.component.css']
+  selector: 'pou-comic',
+  templateUrl: './comic.component.html'
 })
 export class ComicComponent {
 
   comic: any;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {
-    this.route.data.subscribe(d => this.comic = d.comic);
-  }
-
-  toggleWish = () => {
-    const isWish = !this.comic.wish;
-    this.api.markComicWish(this.comic._id, isWish).subscribe(res => {
-      if (res.ok) this.comic.wish = isWish;
-    });
-  }
-
-  markIssueRead = (e) => {
-    this.api.updateIssue(this.comic._id, e.issue, {read: e.val}).subscribe(res => {
-      if (res.ok) {
-        const ix = this.comic.included.findIndex(i => i.id === e.issue);
-        this.comic.included[ix].read = e.val;
+  comic$;
+  private comicQuery = gql`
+  query comic($comicId: String!) { 
+    comic (_id: $comicId) { 
+      _id
+      title
+      publication_date
+      status
+      summary
+      cover
+      wish
+      issues {
+        id
+        title
+        read
+        percentage
+        read
       }
-    });
+      artists {
+        first_name
+        last_name
+      }
+      publishers {
+        name
+      }
+      writers {
+        first_name
+        last_name
+      }
+      genres {
+        name
+      }
+    }
+  }
+  `;
+
+  private markComicWish = gql`
+  mutation ($comicId: String!, $wish: Boolean!) {
+    markComicWish(_id: $comicId, wish: $wish) {
+      _id
+      wish
+    }
+  }
+  `;
+
+  private updateIssueRead = gql`
+  mutation ($comicId: String!, $issueId: String!, $isRead: Boolean! ) {
+    updateIssue(_id: $comicId, issue: $issueId, isRead: $isRead) {
+      _id
+      issues(id: $issueId) {
+        id
+        read
+      }
+    }
+  }
+  `;
+
+
+  constructor(private api: ApiService, private route: ActivatedRoute, private apollo: Apollo) {
+    this.comic$ = this.apollo.watchQuery({
+      query: this.comicQuery, variables: { comicId: this.route.snapshot.params.id }
+    }).valueChanges;
+  }
+
+  toggleWish = (comic) => {
+    this.apollo.mutate({
+      mutation: this.markComicWish,
+      variables: {
+        comicId: comic._id,
+        wish: !comic.wish
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        markComicWish: {
+          __typename: 'Comic',
+          _id: comic._id,
+          wish: !comic.wish
+        },
+      },
+    }).subscribe();
+  }
+
+  markIssueRead = (event) => {
+    this.apollo.mutate({
+      mutation: this.updateIssueRead,
+      variables: {
+        comicId: event.comic,
+        issueId: event.issue,
+        isRead: event.val
+      }
+    }).subscribe();
   }
 
 }
