@@ -11,9 +11,6 @@ import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 import { ResolveService } from './resolve.service';
 
-import { ComicIssueResolve } from './comic-issue-resolve';
-import { ComicsReadResolve } from './comics-read-resolve';
-import { ComicResolve } from './comic-resolve';
 
 import { AppComponent } from './app.component';
 import { ComicComponent } from './comic/comic.component';
@@ -60,10 +57,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
     AuthService,
     AuthGuard,
     ApiService,
-    ResolveService,
-    ComicResolve,
-    ComicsReadResolve,
-    ComicIssueResolve,
+    ResolveService
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
