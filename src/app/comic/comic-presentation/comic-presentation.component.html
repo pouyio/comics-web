@@ -86,7 +86,7 @@
     <h2 class="text-center">Issues</h2>
     <ul class="list-group">
       <li class="list-group-item d-flex justify-content-between" *ngFor="let issue of orderedIssues">
-        <a [routerLink]="['/comic', comic._id, issue.id]">{{issue.title}}</a>
+        <a [routerLink]="['/comic', comic._id, issue.id]">{{issue.title}}  {{issue.percentage}}%</a>
         <button type="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
           Read {{issue.read ? '✅' : '❌'}}
         </button>

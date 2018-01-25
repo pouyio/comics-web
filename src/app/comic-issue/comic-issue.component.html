@@ -1,1 +1,4 @@
-<app-issue-presentation [issue]="issue" (pageRead)="updatePage($event)"><app-issue-presentation>
+<div *ngIf="issue$ | async; let issue">
+    <pou-issue-presentation [issue]="issue" (pageRead)="updatePage($event)">
+    </pou-issue-presentation>
+</div>

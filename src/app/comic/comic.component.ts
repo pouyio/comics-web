@@ -26,6 +26,7 @@ export class ComicComponent {
       wish
       issues {
         id
+        __typename
         title
         read
         percentage
@@ -62,9 +63,12 @@ export class ComicComponent {
   mutation ($comicId: String!, $issueId: String!, $isRead: Boolean! ) {
     updateIssue(_id: $comicId, issue: $issueId, isRead: $isRead) {
       _id
+      __typename
       issues(id: $issueId) {
         id
+        __typename
         read
+        percentage
       }
     }
   }
