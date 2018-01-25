@@ -1,39 +1,72 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../api.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms';
-import { Router, NavigationStart } from '@angular/router';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
 
 @Component({
-  selector: 'app-search',
+  selector: 'pou-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
 
-  listed: Observable<any[]>;
+  listed: Observable<any>;
   searchForm = new FormControl();
-  loading: boolean = false;
-  private routeChangeO: Observable<any[]>;
-  private typeAheadO: Observable<any[]>;
+  loading = false;
+  private typeAheadO: Observable<any>;
 
-  constructor(private api: ApiService, private router: Router) {
-    this.routeChangeO = router.events.map(e => []);
-    this.typeAheadO = this.searchForm.valueChanges
+  private searchQuery = gql`
+  query searchComics($search: String!) {
+    comics(search: $search){
+      _id
+      title
+      cover
+      wish
+      summary
+    }
+  }
+  `;
+
+  private markComicWish = gql`
+  mutation ($comicId: String!, $wish: Boolean!) {
+    markComicWish(_id: $comicId, wish: $wish) {
+      _id
+      wish
+    }
+  }
+  `;
+
+  constructor(private apollo: Apollo) {
+    this.listed = this.searchForm.valueChanges
       .debounceTime(1000)
       .distinctUntilChanged()
       .do(e => this.loading = true)
-      .switchMap(term => (term && term.length > 3) ? api.search(term) : Observable.of([]))
-      .do(e => this.loading = false);
+      .switchMap((search: string) => {
+        return search ? this.apollo.watchQuery({
+          query: this.searchQuery, variables: { search }
+        }).valueChanges : Observable.from([]);
+      })
+      .do(() => this.loading = false);
 
-    this.listed = Observable.merge(this.routeChangeO, this.typeAheadO);
   }
 
-  toggleComicWish(comic) {
-    let isWish = !comic.wish;
-    this.api.markComicWish(comic._id, isWish).subscribe(res => {
-      if (res.ok) comic.wish = isWish;
-    });
+  toggleWish = (comic) => {
+    this.apollo.mutate({
+      mutation: this.markComicWish,
+      variables: {
+        comicId: comic._id,
+        wish: !comic.wish
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        markComicWish: {
+          __typename: 'Comic',
+          _id: comic._id,
+          wish: !comic.wish
+        },
+      },
+    }).subscribe();
   }
 
   limit(text = '', limit = 3) {

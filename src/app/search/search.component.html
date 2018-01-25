@@ -10,13 +10,12 @@
 </div>
 
 <ul class="container" style="position:absolute; z-index:2; overflow-y: auto; max-height: 90vh">
-  <li *ngFor="let item of listed | async" class="">
-    <img style="width:4em; max-height: 6em" class="" [src]="item.cover" alt="cover">
-    <a [routerLink]="['/comic', item._id]">{{item.attributes.title}}</a>
-    <button type="button" class="button" [ngClass]="item.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(item)">Wish</button>
+  <li *ngFor="let comic of listed | async | select: 'comics'">
+    <img style="width:4em; max-height: 6em" class="" [src]="comic.cover" alt="cover">
+    <a [routerLink]="['/comic', comic._id]">{{comic.title}}</a>
+    <button type="button" class="button" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleWish(comic)">Wish</button>
     <div>
-      <span>{{item.attributes.completed ? 'Complete': 'Ongoing'}}</span>
-      <small>{{limit(item.attributes.summary, 100)}}</small>
+      <small>{{limit(comic.summary, 100)}}</small>
     </div>
   </li>
 
