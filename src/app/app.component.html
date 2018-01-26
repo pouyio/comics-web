@@ -15,7 +15,7 @@
       <div class="navbar-item">
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>
-            <li *ngFor="let breadcrumb of getBreadcrumbs(breadcrumbs)"><a [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a></li>
+            <li *ngFor="let breadcrumb of getBreadcrumbs(breadcrumbs)"><a class="has-text-white" [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a></li>
           </ul>
         </nav>
       </div>
