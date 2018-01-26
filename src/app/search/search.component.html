@@ -13,7 +13,10 @@
   <li *ngFor="let comic of listed | async | select: 'comics'">
     <img style="width:4em; max-height: 6em" class="" [src]="comic.cover" alt="cover">
     <a [routerLink]="['/comic', comic._id]">{{comic.title}}</a>
-    <button type="button" class="button" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleWish(comic)">Wish</button>
+    <div class="is-inline" (click)="toggleWish(comic)">
+        <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="comic.wish">
+        <label for="switchRounded">{{comic.wish ? 'Following': 'Follow'}}</label>
+      </div>
     <div>
       <small>{{limit(comic.summary, 100)}}</small>
     </div>
