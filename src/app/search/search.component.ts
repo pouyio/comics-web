@@ -13,6 +13,7 @@ export class SearchComponent {
 
   listed: Observable<any>;
   searchForm = new FormControl();
+  isLoading = false;
 
   private searchQuery = gql`
   query searchComics($search: String!) {
@@ -45,8 +46,10 @@ export class SearchComponent {
     this.listed = this.searchForm.valueChanges
       .debounceTime(500)
       .distinctUntilChanged()
+      .do(() => this.isLoading = true)
       .switchMap(search => this.search$(search))
       .map(({ data }) => data.comics)
+      .do(() => this.isLoading = false)
 
   }
 

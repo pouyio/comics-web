@@ -1,6 +1,6 @@
 <div class="field has-addons is-marginless">
   <div class="control">
-    <a class="button is-small is-light is-outlined" (click)="searchForm.reset()">
+    <a [class.is-loading]="isLoading" class="button is-small is-light is-outlined" (click)="searchForm.reset()">
       Cancel
     </a>
   </div>
