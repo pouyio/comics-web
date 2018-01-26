@@ -57,7 +57,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
     AuthService,
     AuthGuard,
     ApiService,
-    ResolveService
+    ResolveService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
