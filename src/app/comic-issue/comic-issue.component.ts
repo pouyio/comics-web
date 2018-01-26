@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
-import { ApiService } from '../api.service';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs/Observable';
@@ -24,7 +23,7 @@ export class ComicIssueComponent implements OnInit {
   }
   `;
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private apollo: Apollo) { }
+  constructor(private route: ActivatedRoute, private apollo: Apollo) { }
 
   ngOnInit() {
     this.issue$ = this.route.params.switchMap(this.getIssue);

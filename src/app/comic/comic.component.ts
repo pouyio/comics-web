@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'pou-comic',
@@ -11,9 +11,7 @@ import gql from 'graphql-tag';
 })
 export class ComicComponent {
 
-  comic: any;
-
-  comic$;
+  comic$: Observable<any>;
   private comicQuery = gql`
   query comic($comicId: String!) { 
     comic (_id: $comicId) { 
@@ -75,7 +73,7 @@ export class ComicComponent {
   `;
 
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private apollo: Apollo) {
+  constructor(private route: ActivatedRoute, private apollo: Apollo) {
     this.comic$ = this.apollo.watchQuery({
       query: this.comicQuery, variables: { comicId: this.route.snapshot.params.id }
     }).valueChanges;
