@@ -13,8 +13,6 @@ export class SearchComponent {
 
   listed: Observable<any>;
   searchForm = new FormControl();
-  loading = false;
-  private typeAheadO: Observable<any>;
 
   private searchQuery = gql`
   query searchComics($search: String!) {
@@ -37,17 +35,18 @@ export class SearchComponent {
   }
   `;
 
+  private search$ = (search): Observable<any> => {
+    return search ? this.apollo.watchQuery({
+      query: this.searchQuery, variables: { search }
+    }).valueChanges : Observable.of({ data: { comics: [] } });
+  }
+
   constructor(private apollo: Apollo) {
     this.listed = this.searchForm.valueChanges
-      .debounceTime(1000)
+      .debounceTime(500)
       .distinctUntilChanged()
-      .do(e => this.loading = true)
-      .switchMap((search: string) => {
-        return search ? this.apollo.watchQuery({
-          query: this.searchQuery, variables: { search }
-        }).valueChanges : Observable.from([]);
-      })
-      .do(() => this.loading = false);
+      .switchMap(search => this.search$(search))
+      .map(({ data }) => data.comics)
 
   }
 

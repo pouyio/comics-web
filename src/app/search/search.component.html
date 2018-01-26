@@ -10,7 +10,7 @@
 </div>
 
 <ul class="container" style="position:absolute; z-index:2; overflow-y: auto; max-height: 90vh">
-  <li *ngFor="let comic of listed | async | select: 'comics'">
+  <li *ngFor="let comic of listed | async">
     <img style="width:4em; max-height: 6em" class="" [src]="comic.cover" alt="cover">
     <a [routerLink]="['/comic', comic._id]">{{comic.title}}</a>
     <div class="is-inline" (click)="toggleWish(comic)">
@@ -21,9 +21,4 @@
       <small>{{limit(comic.summary, 100)}}</small>
     </div>
   </li>
-
-  <li *ngIf="loading" class="">
-    Loading ...
-  </li>
-
 </ul>
