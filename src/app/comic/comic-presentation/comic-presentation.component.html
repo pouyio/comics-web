@@ -21,77 +21,86 @@
 <section class="section">
 
   <div class="container-fluid">
-    <span>
-      📅 {{comic.publication_date}}
-    </span>
+    <div class="content">
 
-    <p class="col-12">{{comic.summary}}</p>
+      <span>
+        📅 {{comic.publication_date}}
+      </span>
 
-    <div class="col-sm-4 col-6">
-      <img class="img-fluid" [src]="comic.cover" alt="cover">
-    </div>
+      <p class="col-12">{{comic.summary}}</p>
 
-    <div class="col-sm-4 col-6">
-      <h2 class="text-center">Info</h2>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <strong>Artist</strong>:
-          <span *ngFor="let artist of comic.artists">
-            {{artist.first_name}} {{artist.last_name}}
-          </span>
-        </li>
-        <li class="list-group-item">
-          <strong>Publisher</strong>:
-          <span *ngFor="let publisher of comic.publishers">
-            {{publisher.name}}
-          </span>
-        </li>
-        <li class="list-group-item">
-          <strong>Writer</strong>
-          <span *ngFor="let writer of comic.writers">
-            {{writer.first_name}} {{writer.last_name}}
-          </span>
-        </li>
-      </ul>
-    </div>
+      <div class="col-sm-4 col-6">
+        <img class="img-fluid" [src]="comic.cover" alt="cover">
+      </div>
 
-    <div class="col-sm-4">
-      <div class="row">
-        <div class="col-6 col-sm-12">
-          <h2 class="text-center">Genres</h2>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <span class="badge badge-secondary m-1" *ngFor="let genre of comic.genres">
-                {{genre.name}}
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div class="col-6 col-sm-12">
-          <h2 class="text-center">Publication</h2>
-          <ul class="list-group">
-            <li class="list-group-item">
-              {{comic.publication_date}}
-            </li>
-          </ul>
+      <div class="col-sm-4 col-6">
+        <h2 class="text-center">Info</h2>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Artist</strong>:
+            <span *ngFor="let artist of comic.artists">
+              {{artist.first_name}} {{artist.last_name}}
+            </span>
+          </li>
+          <li class="list-group-item">
+            <strong>Publisher</strong>:
+            <span *ngFor="let publisher of comic.publishers">
+              {{publisher.name}}
+            </span>
+          </li>
+          <li class="list-group-item">
+            <strong>Writer</strong>
+            <span *ngFor="let writer of comic.writers">
+              {{writer.first_name}} {{writer.last_name}}
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-6 col-sm-12">
+            <h2 class="text-center">Genres</h2>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="badge badge-secondary m-1" *ngFor="let genre of comic.genres">
+                  {{genre.name}}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-sm-12">
+            <h2 class="text-center">Publication</h2>
+            <ul class="list-group">
+              <li class="list-group-item">
+                {{comic.publication_date}}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 
 </section>
 
-<div class="row">
-  <div class="col-12">
-    <h2 class="text-center">Issues</h2>
-    <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between" *ngFor="let issue of orderedIssues">
-        <a [routerLink]="['/comic', comic._id, issue.id]">{{issue.title}}  {{issue.percentage}}%</a>
-        <button type="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
-          Read {{issue.read ? '✅' : '❌'}}
-        </button>
-        <progress [value]="issue.percentage" max="100"></progress>
-      </li>
-    </ul>
+<section class="section">
+  <div class="container-fluid">
+    <div class="">
+      <div class="content">
+        <h2 class="">Issues</h2>
+        <ul class="">
+          <li *ngFor="let issue of orderedIssues">
+
+            <a [routerLink]="['/comic', comic._id, issue.id]">{{issue.title}} {{issue.percentage}}%</a>
+            <button class="button is-small" type="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
+              Read {{issue.read ? '✅' : '❌'}}
+            </button>
+          </li>
+        </ul>
+
+      </div>
+    </div>
   </div>
-</div>
+</section>
