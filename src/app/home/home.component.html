@@ -1,32 +1,20 @@
-<h1 class="text-center">My Collection</h1>
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let comic of comicsRead">
-    <app-home-item [comic]="comic" [comicsMap]="issuesMap" (toggleButton)="toggleComicWish($event)"></app-home-item>
-  </li>
-</ul>
-
-<!-- <div class="row">
-  <div class="col-sm-6">
-      <h1 class="text-center">News</h1>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let new of news.news">
-          <button class="btn btn-sm btn-outline-primary" routerLink="/comic/{{new.id}}">
-            <img class="img-fluid" style="max-height: 7em" [src]="new.links.cover" alt="cover"> {{new.attributes.title}}
-          </button>
-          <button type="button" class="btn btn-sm" [ngClass]="new.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(new)">Wish</button>
-        </li>
-      </ul>
+<section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">My Collection</h1>
+      <h2 class="subtitle">Following {{($comics | async)?.length}} comics 🧐</h2>
+    </div>
   </div>
+</section>
 
-  <div class="col-sm-6">
-    <h1 class="text-center">Updated</h1>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let update of news.updated">
-        <button class="btn btn-sm btn-outline-primary" routerLink="/comic/{{update.id}}">
-          <img class="img-fluid" style="max-height: 7em" [src]="update.links.cover" alt="cover"> {{update.attributes.title}}
-        </button>
-        <button type="button" class="btn btn-sm" [ngClass]="update.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleComicWish(update)">Wish</button>
-      </li>
-    </ul>
+<section class="section">
+  <div class="container-fluid">
+
+    <div class="columns is-mobile is-variable is-1 is-multiline is-centered">
+      <div class="column is-2-tablet is-one-quarter-mobile" *ngFor="let comic of $comics | async | select: 'comics'">
+        <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>
+      </div>
+    </div>
+
   </div>
-</div> -->
+</section> 

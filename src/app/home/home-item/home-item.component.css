@@ -1,0 +1,27 @@
+.cover-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  min-height: 15.25rem;
+  text-shadow: 0 0 5px black;
+}
+
+.flex-container {
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.to-corner {
+  position: absolute;
+  top: .2em;
+}
+
+.to-right {
+  right: 0;
+}
+
+.to-left {
+  left: 0;
+}

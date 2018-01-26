@@ -1,31 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { ApiService } from '../api.service';
+import { Observable } from 'apollo-link';
+import { Apollo } from 'apollo-angular';
+import { ApolloQueryResult } from 'apollo-client';
+import gql from 'graphql-tag';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'pou-home',
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
 
-  comicsRead: Array<any>;
-  fullComics: Array<any>;
-  issuesMap: Map<any, any>;
+  $comics;
+  private comicsQuery = gql`{ 
+    comics (wish: true) { 
+      _id
+      title
+      wish
+      cover
+      status
+    }
+  }
+  `;
 
-  constructor(private route: ActivatedRoute, private api: ApiService) { }
+  private markComicWish = gql`
+  mutation ($comicId: String!, $wish: Boolean!) {
+    markComicWish(_id: $comicId, wish: $wish) {
+      _id
+      wish
+    }
+  }
+  `;
+
+  constructor(private apollo: Apollo) { }
 
   ngOnInit() {
-    [this.comicsRead, this.fullComics] = this.route.snapshot.data['comics'];
-    const a: any[] = this.fullComics.map((c:any) => [c._id, c]);
-    this.issuesMap = new Map(a);
+    this.$comics = this.apollo.watchQuery({ query: this.comicsQuery }).valueChanges.share();
   }
 
   toggleComicWish = (comic) => {
     const isWish = !comic.wish;
-    this.api.markComicWish(comic._id, isWish).subscribe(res => {
-      if(res.ok) comic.wish = isWish;
-    });
+    this.apollo.mutate({
+      mutation: this.markComicWish,
+      variables: {
+        comicId: comic._id,
+        wish: !comic.wish
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        markComicWish: {
+          __typename: 'Comic',
+          _id: comic._id,
+          wish: !comic.wish,
+        },
+      },
+    }).subscribe();
   }
 
 }

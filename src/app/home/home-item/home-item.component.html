@@ -1,21 +1,13 @@
-<div>
-  <button class="btn btn-sm btn-outline-primary" [routerLink]="['/comic', comic._id]">{{comicsMap.get(comic._id).attributes.title}} </button>
-  <button type="button" class="btn btn-sm" [ngClass]="comic.wish? 'btn-dark': 'btn-outline-dark'" (click)="toggleButton.emit(comic)">Following <i class="fa" [ngClass]="[comic.wish ? 'fa-clock-o': '']"></i></button>
-  <span>
-    <i class="fa" [ngClass]="getCalendarIcon(comic._id)"> </i>
-    <span class="small">{{comicsMap.get(comic._id).attributes.publication_date}}</span>
-  </span>
-</div>
-<div>
-  <span *ngFor="let issue of getIssues(comic)">
-    <a [routerLink]="['/comic', comic._id, issue]" *ngIf="getPercentagePages(comic, issue) || comic[issue].read">
-      <span class="badge m-1" [ngClass]="[comic[issue].read ? 'badge-primary': 'badge-secondary']">
-        <a class="text-white">#{{getIssueNumber(comic._id, issue)}} </a>
-        <span *ngIf="!comic[issue].read; else completed">{{getPercentagePages(comic, issue)}}%</span>
-        <ng-template #completed>
-          <i class="fa fa-check-circle"></i>
-        </ng-template>
-      </span>
-    </a>
-  </span>
+<div [routerLink]="['/comic', comic._id]" class="box has-text-white cover-background is-flex flex-container relative" [style.backgroundImage]="'url('+ comic.cover +')'">
+
+  <div class="field to-corner to-right" (click)="toggleButton.emit(comic); $event.stopPropagation()">
+    <input id="switch" type="checkbox" name="switch" class="switch is-rounded" [checked]="comic.wish">
+    <label for="switch"></label>
+  </div>
+
+  <small>
+    <span class="small">✈️ {{comic.status}}</span>
+  </small>
+  <h1 style="font-size: 1.1em" class="has-text-weight-bold">{{comic.title}}</h1>
+
 </div>

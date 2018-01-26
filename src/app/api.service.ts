@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ResponseContentType} from '@angular/http';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ResolveService } from './resolve.service';
 import { Observable } from 'rxjs/Rx';
 import { BaseService } from './base.service';
 

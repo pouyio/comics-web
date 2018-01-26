@@ -1,1 +1,1 @@
-<app-comic-presentation [comic]="comic" (toggleWish)="toggleWish()" (markIssueRead)="markIssueRead($event)"></app-comic-presentation>
+<pou-comic-presentation *ngIf="comic$ | async; let comic" [comic]="comic | select: 'comic'" (toggleWish)="toggleWish($event)" (markIssueRead)="markIssueRead($event)"></pou-comic-presentation>

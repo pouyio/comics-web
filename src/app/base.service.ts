@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class BaseService {
 
-  protected baseUrl: string = environment.api_url;
+  protected baseUrl: String = environment.rest_url;
 
   constructor(protected http: HttpClient, protected auth: AuthService, protected resolver: ResolveService) {}
 

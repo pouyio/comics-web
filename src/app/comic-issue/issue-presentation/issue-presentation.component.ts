@@ -1,25 +1,19 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-issue-presentation',
-  templateUrl: './issue-presentation.component.html',
-  styleUrls: ['./issue-presentation.component.css']
+  selector: 'pou-issue-presentation',
+  templateUrl: './issue-presentation.component.html'
 })
 export class IssuePresentationComponent implements OnInit {
 
   @Input() issue;
   @Output() pageRead = new EventEmitter();
-  @Output() onGoIssue = new EventEmitter();
-  page: number = 0;
-  lastPage: number = 0;
-
-  constructor() { }
+  page = 0;
+  lastPage = 0;
 
   ngOnInit() {
-    if(this.issue) {
-      this.page = this.issue.info.page | 0;
+      this.page = this.issue.page;
       this.lastPage = this.issue.pages.length - 1;
-    }
   }
 
   setPage = (page) => {

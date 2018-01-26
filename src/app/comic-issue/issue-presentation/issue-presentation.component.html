@@ -1,10 +1,9 @@
-<div *ngIf="issue">
+<div class="m-auto" style="width:60%">
+  <app-image-viewer (onSwiped)="onPageChange($event)" [img]="issue.pages[page]"></app-image-viewer>
+</div>
 
-  <div class="m-auto" style="width:60%">
-    <app-image-viewer (onSwiped)="onPageChange($event)" (toIssue)="onGoIssue.emit()" [img]="issue.pages[page]"></app-image-viewer>
-  </div>
-
-  <div class="container">
+<div class="row">
+   <div class="container">
 
     <div class="row">
       <div class="col-6">
@@ -20,6 +19,4 @@
       </div>
     </div>
   </div>
-
-
 </div>

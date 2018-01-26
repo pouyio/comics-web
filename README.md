@@ -2,6 +2,7 @@
 Comic reader online
 
 ## TODO
+- [ ] Improve search(less results, UI, less text, live reload wish, etc)
 - [ ] Download as pdf
 - [x] Dont show comics in home with 0 pages/issues read
 - [x] Fix names on issues from home
