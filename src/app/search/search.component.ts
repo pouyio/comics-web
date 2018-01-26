@@ -75,4 +75,8 @@ export class SearchComponent {
     return text.length - 3 > limit ? text.substring(0, limit - 3).concat('...') : text;
   }
 
+  limit(text = '', limit = 3) {
+    return text.length > (limit - 3) ? text.substring(0, limit - 3).concat('...') : text;
+  }
+
 }

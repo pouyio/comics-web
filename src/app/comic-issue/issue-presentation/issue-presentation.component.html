@@ -3,12 +3,20 @@
 </div>
 
 <div class="row">
-  <div class="col-6">
-    <input style="width:100%" type="range" name="pages" min="0" [max]="issue.pages.length - 1" [(ngModel)]="page" (change)="onChange(page)">
-  </div>
+   <div class="container">
 
-  <div class="btn-group col-6">
-    <button type="button" class="btn btn-secondary" (click)="onPageChange(-1)" [disabled]="page === 0">prev</button>
-    <button type="button" class="btn btn-secondary" (click)="onPageChange(+1)" [disabled]="page === lastPage">next</button>
+    <div class="row">
+      <div class="col-6">
+        <input style="width:100%" type="range" name="pages" min="0" [max]="issue.pages.length - 1" [(ngModel)]="page" (change)="onChange(page)">
+      </div>
+
+      <div class="col-6">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary" (click)="onPageChange(-1)" [disabled]="page === 0">prev</button>
+          <button type="button" class="btn btn-secondary" (click)="onPageChange(+1)" [disabled]="page === lastPage">next</button>
+        </div>
+        <button type="button" class="btn btn-secondary" (click)="onGoIssue.emit()">to Issue</button>
+      </div>
+    </div>
   </div>
 </div>
