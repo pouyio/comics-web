@@ -14,7 +14,6 @@ export class SearchComponent {
   listed: Observable<any>;
   searchForm = new FormControl();
   isLoading = false;
-  searchable: Boolean;
 
   private searchQuery = gql`
   query searchComics($search: String!) {

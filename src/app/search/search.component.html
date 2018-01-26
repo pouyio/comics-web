@@ -5,11 +5,11 @@
     </a>
   </div>
   <div class="control">
-    <input [formControl]="searchForm" (keyup.escape)="searchForm.reset()" [class.is-danger]="searchForm.value && searchForm.value.length <= 3" class="input is-small" type="text" placeholder="Search comic" (focus)="searchable = true" (blur)="searchable = false">
+    <input [formControl]="searchForm" (keyup.escape)="searchForm.reset()" [class.is-danger]="searchForm.value && searchForm.value.length <= 3" class="input is-small" type="text" placeholder="Search comic">
   </div>
 </div>
 
-<ul class="container" *ngIf="searchable" style="position:absolute; z-index:2; overflow-y: auto; max-height: 90vh">
+<ul class="container" style="position:absolute; z-index:2; overflow-y: auto; max-height: 90vh">
   <li *ngFor="let comic of listed | async">
     <img style="width:4em; max-height: 6em" class="" [src]="comic.cover" alt="cover">
     <a [routerLink]="['/comic', comic._id]">{{comic.title}}</a>

@@ -74,9 +74,10 @@ export class ComicComponent {
 
 
   constructor(private route: ActivatedRoute, private apollo: Apollo) {
-    this.comic$ = this.apollo.watchQuery({
-      query: this.comicQuery, variables: { comicId: this.route.snapshot.params.id }
-    }).valueChanges;
+
+    this.comic$ = this.route.params.switchMap(({id}) => this.apollo.watchQuery({
+      query: this.comicQuery, variables: { comicId: id }
+    }).valueChanges);
   }
 
   toggleWish = (comic) => {
