@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 $turquoise: #0080d1;
-$desktop: 600px;
+$tablet: 600px;
 $breadcrumb-item-hover-color:	#fff;
 
 
@@ -14,4 +14,21 @@ html {
 
 .navbar-menu {
   background-color: $dark;
+}
+
+@keyframes spinnerRotate {
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+    
+}
+
+.loading {
+  position: fixed;
+  top: 45vh;
+  left: 45vw;
+  font-size: 5em;
+  animation-name: spinnerRotate;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
