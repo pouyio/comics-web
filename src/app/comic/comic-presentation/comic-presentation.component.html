@@ -31,15 +31,15 @@
               <div class="tile is-parent is-vertical is-8">
 
                 <article class="tile is-child notification is-danger">
-                  <p class="title"> Genres </p>
-                  <p class="subtitle">
+                  <p class="title is-marginless"> Genres </p>
+                  <p>
                     {{ joinComma(comic.genres) }}
                   </p>
                 </article>
 
                 <article class="tile is-child notification is-warning">
-                  <p class="title">Info</p>
-                  <ul class="subtitle">
+                  <p class="title is-marginless">Info</p>
+                  <ul>
                     <li>
                       <strong>Artist</strong>:
                       <span *ngFor="let artist of comic.artists">
@@ -74,9 +74,9 @@
             </div>
             <div class="tile is-parent">
 
-              <article class="tile is-child notification is-success">
-                <p class="title"> 📅 {{comic.publication_date}} </p>
-                <p class="subtitle has-text-justified"> {{comic.summary}}</p>
+              <article class="tile is-child notification is-info">
+                <p class="title is-marginless"> 📅 {{comic.publication_date}} </p>
+                <p class="has-text-justified"> {{comic.summary}}</p>
               </article>
 
             </div>
@@ -86,15 +86,16 @@
 
       <div class="column is-5">
         <div class="tile is-acenstor">
-          <article class="tile is-child notification is-info" style="padding-right: 1em">
-            <p class="title">Issues</p>
+          <article class="tile is-child notification is-success" style="padding-right: 1em">
+            <p class="title is-marginless">Issues</p>
             <ul style="overflow-y: auto; max-height: 100vh;">
-              <li *ngFor="let issue of orderedIssues">
+              <li *ngFor="let issue of orderedIssues" style="margin: .2em">
 
                 <a [routerLink]="['/comic', comic._id, issue.id]">{{getPercentageIcon(issue.percentage)}} {{issue.title}}</a>
-                <button class="button is-small" type="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
-                  {{issue.read ? '✅' : '❌'}}
-                </button>
+                <div class="is-inline" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
+                  <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="issue.read">
+                  <label for="switchRounded"></label>
+                </div>
               </li>
             </ul>
           </article>
