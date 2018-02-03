@@ -6,8 +6,8 @@
         {{comic.title}}
       </h1>
 
-      <h2 class="is-flex" style="justify-content: space-between">
-        <div class="is-inline" (click)="toggleWish.emit(comic)">
+      <h2 class="is-flex" style="justify-content: space-between; max-width: 70vw; margin: auto;">
+        <div (click)="toggleWish.emit(comic)">
           <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="comic.wish">
           <label for="switchRounded">{{comic.wish ? 'Following': 'Follow'}}</label>
         </div>
@@ -28,7 +28,7 @@
         <div class="tile is-ancestor">
           <div class="tile is-vertical">
             <div class="tile">
-              <div class="tile is-parent is-vertical">
+              <div class="tile is-parent is-vertical is-8">
 
                 <article class="tile is-child notification is-danger">
                   <p class="title"> Genres </p>
@@ -62,7 +62,7 @@
                 </article>
 
               </div>
-              <div class="tile is-parent">
+              <div class="tile is-parent is-4">
 
                 <article class="tile is-child">
                   <figure class="image">
