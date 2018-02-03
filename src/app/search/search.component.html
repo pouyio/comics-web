@@ -1,9 +1,9 @@
 <div class="field has-addons is-marginless">
   <div class="control">
-    <input (focus)="isFocused = true" (focusout)="onFocusout()" [formControl]="searchForm" (keyup.escape)="searchForm.reset()"
+    <input [formControl]="searchForm" (keyup.escape)="searchForm.reset()"
       [class.is-danger]="searchForm.value && searchForm.value.length <= 3" class="input is-small" type="text" placeholder="Search">
   </div>
-  <div class="control" *ngIf="isFocused">
+  <div class="control">
     <a [class.is-loading]="isLoading" class="button is-small is-light is-outlined" (click)="searchForm.reset()">
       <span class="is-hidden-mobile"> Cancel </span>
       <span class="is-hidden-tablet"> ❌ </span>
