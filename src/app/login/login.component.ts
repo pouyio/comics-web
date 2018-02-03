@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'pou-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent {

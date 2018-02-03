@@ -1,3 +1,9 @@
 .navbar a {
   font-size: .91em;
 }
+
+.spread-nav-menu {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}

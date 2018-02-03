@@ -21,86 +21,88 @@
 <section class="section">
 
   <div class="container-fluid">
-    <div class="content">
 
-      <span>
-        📅 {{comic.publication_date}}
-      </span>
+    <div class="columns is-tablet">
 
-      <p class="col-12">{{comic.summary}}</p>
+      <div class="column is-7">
+        <div class="tile is-ancestor">
+          <div class="tile is-vertical">
+            <div class="tile">
+              <div class="tile is-parent is-vertical">
 
-      <div class="col-sm-4 col-6">
-        <img class="img-fluid" [src]="comic.cover" alt="cover">
-      </div>
+                <article class="tile is-child notification is-danger">
+                  <p class="title"> Genres </p>
+                  <p class="subtitle">
+                    {{ joinComma(comic.genres) }}
+                  </p>
+                </article>
 
-      <div class="col-sm-4 col-6">
-        <h2 class="text-center">Info</h2>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <strong>Artist</strong>:
-            <span *ngFor="let artist of comic.artists">
-              {{artist.first_name}} {{artist.last_name}}
-            </span>
-          </li>
-          <li class="list-group-item">
-            <strong>Publisher</strong>:
-            <span *ngFor="let publisher of comic.publishers">
-              {{publisher.name}}
-            </span>
-          </li>
-          <li class="list-group-item">
-            <strong>Writer</strong>
-            <span *ngFor="let writer of comic.writers">
-              {{writer.first_name}} {{writer.last_name}}
-            </span>
-          </li>
-        </ul>
-      </div>
+                <article class="tile is-child notification is-warning">
+                  <p class="title">Info</p>
+                  <ul class="subtitle">
+                    <li>
+                      <strong>Artist</strong>:
+                      <span *ngFor="let artist of comic.artists">
+                        {{artist.first_name}} {{artist.last_name}}
+                      </span>
+                    </li>
+                    <li>
+                      <strong>Publisher</strong>:
+                      <span *ngFor="let publisher of comic.publishers">
+                        {{publisher.name}}
+                      </span>
+                    </li>
+                    <li>
+                      <strong>Writer</strong>
+                      <span *ngFor="let writer of comic.writers">
+                        {{writer.first_name}} {{writer.last_name}}
+                      </span>
+                    </li>
+                  </ul>
+                </article>
 
-      <div class="col-sm-4">
-        <div class="row">
-          <div class="col-6 col-sm-12">
-            <h2 class="text-center">Genres</h2>
-            <ul class="list-group">
-              <li class="list-group-item">
-                <span class="badge badge-secondary m-1" *ngFor="let genre of comic.genres">
-                  {{genre.name}}
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div class="col-6 col-sm-12">
-            <h2 class="text-center">Publication</h2>
-            <ul class="list-group">
-              <li class="list-group-item">
-                {{comic.publication_date}}
-              </li>
-            </ul>
+              </div>
+              <div class="tile is-parent">
+
+                <article class="tile is-child">
+                  <figure class="image">
+                    <img class="img-fluid" [src]="comic.cover" alt="cover">
+                  </figure>
+                </article>
+
+              </div>
+            </div>
+            <div class="tile is-parent">
+
+              <article class="tile is-child notification is-success">
+                <p class="title"> 📅 {{comic.publication_date}} </p>
+                <p class="subtitle has-text-justified"> {{comic.summary}}</p>
+              </article>
+
+            </div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
+      <div class="column is-5">
+        <div class="tile is-acenstor">
+          <article class="tile is-child notification is-info">
+            <p class="title">Issues</p>
+            <ul style="overflow-y: auto; max-height: 100vh;">
+              <li *ngFor="let issue of orderedIssues">
 
-</section>
-
-<section class="section">
-  <div class="container-fluid">
-    <div class="">
-      <div class="content">
-        <h2 class="">Issues</h2>
-        <ul class="">
-          <li *ngFor="let issue of orderedIssues">
-
-            <a [routerLink]="['/comic', comic._id, issue.id]">{{issue.title}} {{issue.percentage}}%</a>
-            <button class="button is-small" type="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
-              Read {{issue.read ? '✅' : '❌'}}
-            </button>
-          </li>
-        </ul>
-
+                <a [routerLink]="['/comic', comic._id, issue.id]">{{getPercentageIcon(issue.percentage)}} {{issue.title}}</a>
+                <button class="button is-small" type="button" aria-pressed="false" autocomplete="off" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
+                  {{issue.read ? '✅' : '❌'}}
+                </button>
+              </li>
+            </ul>
+          </article>
+        </div>
       </div>
+
+
     </div>
   </div>
+
 </section>

@@ -1,35 +1,35 @@
-<nav *ngIf="logged" style="position: fixed; width: 100%; z-index: 1" class="navbar is-dark" role="navigation" aria-label="main navigation">
+<nav *ngIf="logged" class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
 
   <div class="navbar-brand">
     <a class="navbar-item is-size-4 has-text-weight-light" routerLink="/comics" [routerLinkActive]="['is-active']">📚 Home</a>
 
-    <div class="navbar-burger burger" (click)="isActive = !isActive">
+    <div class="navbar-item">
+      <pou-search></pou-search>
+    </div>
+
+    <div class="navbar-burger burger" [ngClass]="{'is-active': isActive}" (click)="isActive = !isActive">
       <span></span>
       <span></span>
       <span></span>
     </div>
   </div>
 
-  <div [ngClass]="{'is-active': isActive}" class="navbar-menu">
-      <div class="navbar-start">
+  <div [ngClass]="{'is-active': isActive, 'spread-nav-menu': isActive}" class="navbar-menu">
+    <div class="navbar-start">
       <div class="navbar-item">
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>
-            <li *ngFor="let breadcrumb of getBreadcrumbs(breadcrumbs)"><a class="has-text-white" [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a></li>
+            <li *ngFor="let breadcrumb of getBreadcrumbs(breadcrumbs)">
+              <a class="has-text-white" [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a>
+            </li>
           </ul>
         </nav>
       </div>
-      </div>
-      <div class="navbar-end">
-      <div class="navbar-item">
-        <pou-search></pou-search>
-      </div>
-      <a class="navbar-item" (click)="logout()"> ❌ Logout</a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item has-text-white" (click)="logout()"> ❌ Logout</a>
     </div>
   </div>
-</nav>
-
-<nav *ngIf="logged" class="navbar">
 </nav>
 
 <router-outlet></router-outlet>

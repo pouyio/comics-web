@@ -12,10 +12,19 @@ export class ComicPresentationComponent implements OnChanges {
   @Output() markIssueRead = new EventEmitter();
   orderedIssues;
 
-  constructor() { }
-
   ngOnChanges(changes) {
     this.orderedIssues = this._sortIssues([...changes.comic.currentValue.issues]);
+  }
+
+  joinComma = (list) => list.map(g => g.name).join(', ');
+
+  getPercentageIcon = (percentage) => {
+    return percentage < 20 ?
+    '🌑' : percentage < 40 ?
+    '🌘' : percentage < 60 ?
+    '🌗' : percentage < 80 ?
+    '🌖' : percentage < 100 ?
+    '🌕' : '🌑';
   }
 
   private _sortIssues(issues) {
