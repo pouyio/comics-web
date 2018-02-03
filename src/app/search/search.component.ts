@@ -10,6 +10,7 @@ import { Apollo } from 'apollo-angular';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
+  isFocused: boolean;
 
   listed: Observable<any>;
   searchForm = new FormControl();
@@ -73,6 +74,11 @@ export class SearchComponent {
 
   limit(text = '', limit = 3) {
     return text.length > (limit - 3) ? text.substring(0, limit - 3).concat('...') : text;
+  }
+
+  onFocusout = () => {
+    this.searchForm.reset();
+    this.isFocused = false;
   }
 
 }

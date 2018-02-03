@@ -1,11 +1,13 @@
 <div class="field has-addons is-marginless">
   <div class="control">
-    <a [class.is-loading]="isLoading" class="button is-small is-light is-outlined" (click)="searchForm.reset()">
-      Cancel
-    </a>
+    <input (focus)="isFocused = true" (focusout)="onFocusout()" [formControl]="searchForm" (keyup.escape)="searchForm.reset()"
+      [class.is-danger]="searchForm.value && searchForm.value.length <= 3" class="input is-small" type="text" placeholder="Search">
   </div>
-  <div class="control">
-    <input [formControl]="searchForm" (keyup.escape)="searchForm.reset()" [class.is-danger]="searchForm.value && searchForm.value.length <= 3" class="input is-small" type="text" placeholder="Search comic">
+  <div class="control" *ngIf="isFocused">
+    <a [class.is-loading]="isLoading" class="button is-small is-light is-outlined" (click)="searchForm.reset()">
+      <span class="is-hidden-mobile"> Cancel </span>
+      <span class="is-hidden-tablet"> ❌ </span>
+    </a>
   </div>
 </div>
 
@@ -14,9 +16,9 @@
     <img style="width:4em; max-height: 6em" class="" [src]="comic.cover" alt="cover">
     <a [routerLink]="['/comic', comic._id]">{{comic.title}}</a>
     <div class="is-inline" (click)="toggleWish(comic)">
-        <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="comic.wish">
-        <label for="switchRounded">{{comic.wish ? 'Following': 'Follow'}}</label>
-      </div>
+      <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="comic.wish">
+      <label for="switchRounded">{{comic.wish ? 'Following': 'Follow'}}</label>
+    </div>
     <div>
       <small>{{limit(comic.summary, 100)}}</small>
     </div>
