@@ -16,6 +16,20 @@
 
     </div>
   </div>
+  <div class="hero-foot is-hidden-tablet">
+    <nav class="tabs is-boxed is-fullwidth">
+      <div class="container">
+        <ul>
+          <li [ngClass]="{'is-active': selectedTab === 'general'}" (click)="selectedTab = 'general'">
+            <a>General</a>
+          </li>
+          <li [ngClass]="{'is-active': selectedTab === 'issues'}" (click)="selectedTab = 'issues'">
+            <a>Issues</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </section>
 
 <section class="section">
@@ -24,7 +38,7 @@
 
     <div class="columns is-tablet">
 
-      <div class="column is-7">
+      <div class="column is-7" *ngIf="isVisible('general')">
         <div class="tile is-ancestor">
           <div class="tile is-vertical">
             <div class="tile">
@@ -66,7 +80,7 @@
 
                 <article class="tile is-child">
                   <figure class="image">
-                    <img class="img-fluid" [src]="comic.cover" alt="cover" style="border-radius: 3px">
+                    <img (click)="toggleZoomIn()" [ngClass]="{'zoomIn': zoomed}" class="img-fluid zoomable" [src]="comic.cover" alt="cover" style="border-radius: 3px">
                   </figure>
                 </article>
 
@@ -84,11 +98,11 @@
         </div>
       </div>
 
-      <div class="column is-5">
+      <div class="column is-5" *ngIf="isVisible('issues')">
         <div class="tile is-acenstor">
           <article class="tile is-child notification is-success" style="padding-right: 1em">
             <p class="title is-marginless">Issues ({{orderedIssues.length}})</p>
-            <ul style="overflow-y: auto; max-height: 100vh;">
+            <ul [ngClass]="{'no-overflow': currentWidth > mobileWidth}">
               <li *ngFor="let issue of orderedIssues" style="margin: .2em">
 
                 <a [routerLink]="['/comic', comic._id, issue.id]">{{getPercentageIcon(issue.percentage)}} {{issue.title}}</a>
