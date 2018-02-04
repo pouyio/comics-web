@@ -21,14 +21,3 @@ html {
     to{transform:rotate(360deg);}
     
 }
-
-.loading {
-  position: fixed;
-  top: 45vh;
-  left: 45vw;
-  font-size: 5em;
-  animation-name: spinnerRotate;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
