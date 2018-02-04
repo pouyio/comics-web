@@ -12,6 +12,6 @@
 
 <ul *ngIf="listed | async; let comics" class="container custom-container">
   <li *ngFor="let comic of comics">
-    <pou-search-item [comic]="comic" (goTo)="onGoTo($event)"></pou-search-item>
+    <pou-search-item [comic]="comic" (goTo)="onGoTo($event)" (onToggleWish)="toggleWish($event)"></pou-search-item>
   </li>
 </ul>

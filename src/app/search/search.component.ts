@@ -34,7 +34,7 @@ export class SearchComponent {
   mutation ($comicId: String!, $wish: Boolean!) {
     markComicWish(_id: $comicId, wish: $wish) {
       _id
-      wish
+      wishs
     }
   }
   `;
