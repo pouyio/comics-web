@@ -16,7 +16,8 @@
 
   <div [ngClass]="{'is-active': isActive, 'spread-nav-menu': isActive}" class="navbar-menu">
     <div class="navbar-start">
-      <div class="navbar-item">
+      <a class="navbar-item has-text-white" [routerLink]="['/search']"> 🔍 Advanced</a>
+      <div *ngIf="getBreadcrumbs(breadcrumbs).length" class="navbar-item">
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>
             <li *ngFor="let breadcrumb of getBreadcrumbs(breadcrumbs)">
