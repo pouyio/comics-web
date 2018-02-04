@@ -1,6 +1,6 @@
-<img [class.full-screen]="fullScreen" class="img-fluid" [src]="img" alt="comic image" (click)="toggleFullScreen()" (load)="onLoaded()">
+<img [class.full-screen]="fullscreen" [src]="img" alt="comic image" (click)="onClick()" (load)="onLoaded()">
 
-<div [hidden]="!fullScreen">
+<div [hidden]="!fullscreen">
   <button class="button-hover button-prev" (click)="swipe(-1)"></button>
   <button class="button-hover button-next" (click)="swipe(1)"></button>
 </div>

@@ -1,29 +1,27 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-image-viewer',
+  selector: 'pou-image-viewer',
   templateUrl: './image-viewer.component.html',
   styleUrls: ['./image-viewer.component.css']
 })
 export class ImageViewerComponent {
 
-  @Input()
-  img: string;
+  @Input() img: string;
+  @Input() fullscreen: boolean;
   @Output() onSwiped = new EventEmitter<number>();
-  fullScreen: boolean = false;
-
-  constructor() { }
-
-  toggleFullScreen() {
-    this.fullScreen = !this.fullScreen;
-  }
+  @Output() onToggle = new EventEmitter<number>();
 
   swipe(e) {
     this.onSwiped.emit(e);
   }
 
+  onClick() {
+    this.onToggle.emit();
+  }
+
   onLoaded() {
-    window.scroll({top: 0, behavior: 'smooth'});
+    window.scroll({ top: 0, behavior: 'smooth' });
   }
 
 }

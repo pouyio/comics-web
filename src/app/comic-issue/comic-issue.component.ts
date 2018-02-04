@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs/Observable';
@@ -10,23 +10,27 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ComicIssueComponent implements OnInit {
   issue$: Observable<any>;
+  id: string;
 
   private updateQuery = gql`
   mutation ($comic: String!, $issue: String!, $page: Int!) {
     updateIssue(_id: $comic, issue: $issue, page: $page) {
+      _id
+      __typename
       issues(id: $issue) {
         id
         __typename
         page
+        percentage
       } 
     }
   }
   `;
 
-  constructor(private route: ActivatedRoute, private apollo: Apollo) { }
+  constructor(private route: ActivatedRoute, private router: Router, private apollo: Apollo) { }
 
   ngOnInit() {
-    this.issue$ = this.route.params.switchMap(this.getIssue);
+    this.issue$ = this.route.params.do(({id}) => this.id = id).switchMap(this.getIssue);
   }
 
   private getIssue = params => this.apollo.watchQuery({
@@ -58,7 +62,9 @@ export class ComicIssueComponent implements OnInit {
         issue: this.route.snapshot.params.issue,
         page
       }
-    }).subscribe()
+    }).subscribe();
   }
+
+  goComic = () => this.router.navigate(['/comic', this.id]);
 
 }

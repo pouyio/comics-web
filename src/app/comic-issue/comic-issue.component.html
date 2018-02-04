@@ -1,4 +1,4 @@
 <div *ngIf="issue$ | async; let issue">
-    <pou-issue-presentation [issue]="issue" (pageRead)="updatePage($event)">
+    <pou-issue-presentation [issue]="issue" (pageRead)="updatePage($event)" (onGoComic)="goComic()">
     </pou-issue-presentation>
 </div>

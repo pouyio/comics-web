@@ -1,22 +1,30 @@
-<div class="m-auto" style="width:60%">
-  <app-image-viewer (onSwiped)="onPageChange($event)" [img]="issue.pages[page]"></app-image-viewer>
+<div class="columns is-centered is-mobile level" style="height: 75vh;">
+  <div class="column is-2-tablet is-3-mobile is-narrow">
+    <pou-image-viewer *ngIf="page - 1 >= 0" (onToggle)="onPageChange(-1)" (onSwiped)="onPageChange($event)"
+      [img]="issue.pages[page - 1]">
+    </pou-image-viewer>
+  </div>
+  <div class="column is-5-tablet is-6-mobile is-narrow">
+    <pou-image-viewer (onToggle)="onFullscreen()" [fullscreen]="isFullscreen" (onSwiped)="onPageChange($event)"
+      [img]="issue.pages[page]">
+    </pou-image-viewer>
+  </div>
+  <div class="column is-2-tablet is-3-mobile is-narrow">
+    <pou-image-viewer *ngIf="page + 1 <= issue.pages.length - 1" (onToggle)="onPageChange(1)" (onSwiped)="onPageChange($event)"
+      [img]="issue.pages[page + 1]">
+    </pou-image-viewer>
+  </div>
 </div>
 
-<div class="row">
-   <div class="container">
+<div class="columns is-centered has-text-centered">
+  <div class="column is-two-thirds is-narrow">
+    <input class="slider is-fullwidth is-info is-small is-circle" step="1" min="0" [max]="issue.pages.length - 1" [(ngModel)]="page"
+      (change)="onChange(page)" type="range">
+  </div>
+</div>
 
-    <div class="row">
-      <div class="col-6">
-        <input style="width:100%" type="range" name="pages" min="0" [max]="issue.pages.length - 1" [(ngModel)]="page" (change)="onChange(page)">
-      </div>
-
-      <div class="col-6">
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary" (click)="onPageChange(-1)" [disabled]="page === 0">prev</button>
-          <button type="button" class="btn btn-secondary" (click)="onPageChange(+1)" [disabled]="page === lastPage">next</button>
-        </div>
-        <button type="button" class="btn btn-secondary" (click)="onGoIssue.emit()">to Issue</button>
-      </div>
-    </div>
+<div class="columns is-centered has-text-centered">
+  <div class="column is-half is-narrow">
+    <button type="button" class="button is-dark" (click)="onGoComic.emit()">Comic ↩️</button>
   </div>
 </div>
