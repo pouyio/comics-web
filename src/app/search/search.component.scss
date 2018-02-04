@@ -1,5 +1,12 @@
 @import "~bulma";
 
 ul {
-  background: $grey;
+  background: $dark;
+}
+
+.custom-container {
+  position:fixed;
+  max-height: 90vh;
+  z-index: 2;
+  overflow-y: auto;
 }

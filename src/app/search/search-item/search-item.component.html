@@ -1,0 +1,32 @@
+<div class="tile is-ancestor columns is-mobile" style="border: 1px solid; border-radius: 3px; margin: .3em">
+  <div class="tile is-vertical is-4">
+    <div class="tile is-parent is-paddingless">
+      <article class="tile is-child">
+        <figure class="image">
+          <img [src]="comic.cover" alt="cover">
+
+          <div class="field to-corner to-right" (click)="onToggleWish.emit(comic)">
+            <input id="switch" type="checkbox" name="switch" class="switch is-rounded" [checked]="comic.wish">
+            <label for="switch"></label>
+          </div>
+
+        </figure>
+      </article>
+    </div>
+  </div>
+
+  <div class="tile is-vertical is-parent" (click)="goTo.emit(comic._id)">
+
+    <div class="tile is-child has-text-centered">
+      <p class="has-text-weight-bold is-size-4-tablet" >{{comic.title}}</p>
+      <p class="is-size-7">✈️ {{comic.status}}</p>
+    </div>
+    
+    <div class="tile is-child">
+      <p class="has-text-centered">📅 {{comic.publication_date}}</p>
+      <p class="is-size-7">{{limit(comic.summary, 100)}}</p>
+    </div>
+
+  </div>
+
+</div>

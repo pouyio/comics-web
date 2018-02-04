@@ -1,0 +1,12 @@
+.to-corner {
+    position: absolute;
+    top: .4em;
+}
+
+.to-right {
+    right: 0;
+}
+
+.to-left {
+    left: 0;
+}

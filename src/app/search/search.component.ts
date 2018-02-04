@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pou-search',
@@ -22,6 +23,8 @@ export class SearchComponent {
       title
       cover
       wish
+      publication_date
+      status
       summary
     }
   }
@@ -42,7 +45,7 @@ export class SearchComponent {
     }).valueChanges : Observable.of({ data: { comics: [] } });
   }
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private router: Router) {
     this.listed = this.searchForm.valueChanges
       .debounceTime(500)
       .distinctUntilChanged()
@@ -50,6 +53,13 @@ export class SearchComponent {
       .switchMap(search => this.search$(search))
       .map(({ data }) => data.comics)
       .do(() => this.isLoading = false);
+    // this.listed = Observable.of('spawn')
+    //   .debounceTime(500)
+    //   .distinctUntilChanged()
+    //   .do(() => this.isLoading = true)
+    //   .switchMap(search => this.search$(search))
+    //   .map(({ data }) => data.comics)
+    //   .do(() => this.isLoading = false);
 
   }
 
@@ -71,8 +81,9 @@ export class SearchComponent {
     }).subscribe();
   }
 
-  limit(text = '', limit = 3) {
-    return text.length > (limit - 3) ? text.substring(0, limit - 3).concat('...') : text;
+  onGoTo = (comicId) => {
+    this.searchForm.reset();
+    this.router.navigate(['/comic', comicId]);
   }
 
 }
