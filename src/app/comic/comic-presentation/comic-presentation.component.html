@@ -100,15 +100,23 @@
 
       <div class="column is-5" *ngIf="isVisible('issues')">
         <div class="tile is-acenstor">
-          <article class="tile is-child notification is-success" style="padding-right: 1em">
+          <article class="tile is-child notification is-success" style="padding-right: .6em">
             <p class="title is-marginless">Issues ({{orderedIssues.length}})</p>
             <ul [ngClass]="{'no-overflow': currentWidth > mobileWidth}">
               <li *ngFor="let issue of orderedIssues" style="margin: .2em">
+                <div class="is-flex" style="align-items: center; justify-content: space-between">
 
-                <a [routerLink]="['/comic', comic._id, issue.id]">{{getPercentageIcon(issue.percentage)}} {{issue.title}}</a>
-                <div class="is-inline" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
-                  <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="issue.read">
-                  <label for="switchRounded"></label>
+                  <span>
+                    {{getPercentageIcon(issue.percentage)}}
+                  </span>
+
+                  <a [routerLink]="['/comic', comic._id, issue.id]"> {{issue.title}}</a>
+
+                  <div class="is-inline" (click)="markIssueRead.emit({comic: comic._id, issue: issue.id, val: !issue.read})">
+                    <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="issue.read">
+                    <label for="switchRounded"></label>
+                  </div>
+
                 </div>
               </li>
             </ul>
