@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'pou-comic-presentation',
