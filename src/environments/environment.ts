@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:4000/graphql',
-  rest_url: 'https://comic.vicenteortiz.me:8081'
+  rest_url: 'https://aws.vicenteortiz.me:8081'
 };
