@@ -6,6 +6,12 @@
         {{comic.title}}
       </h1>
 
+      <p class="tags is-centered">
+        <span class="tag is-rounded" *ngFor="let genre of comic.genres">
+          {{ genre.name }}
+        </span>
+      </p>
+
       <h2 class="is-flex" style="justify-content: space-between; max-width: 70vw; margin: auto;">
         <div (click)="toggleWish.emit(comic)">
           <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="comic.wish">
@@ -43,13 +49,6 @@
           <div class="tile is-vertical">
             <div class="tile">
               <div class="tile is-parent is-vertical is-8">
-
-                <article class="tile is-child notification is-danger">
-                  <p class="title is-marginless"> Genres </p>
-                  <p>
-                    {{ joinComma(comic.genres) }}
-                  </p>
-                </article>
 
                 <article class="tile is-child notification is-warning">
                   <p class="title is-marginless">Info</p>

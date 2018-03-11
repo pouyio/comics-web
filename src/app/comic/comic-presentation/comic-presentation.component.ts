@@ -32,8 +32,6 @@ export class ComicPresentationComponent implements OnChanges {
     this.orderedIssues = this._sortIssues([...changes.comic.currentValue.issues]);
   }
 
-  joinComma = (list) => list.map(g => g.name).join(', ');
-
   getPercentageIcon = (percentage) => {
     return percentage < 20 ?
       '🌑' : percentage < 40 ?
