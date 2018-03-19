@@ -1,7 +1,9 @@
 <nav *ngIf="logged" class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
 
   <div class="navbar-brand">
-    <a class="navbar-item is-size-4 has-text-weight-light" routerLink="/comics" [routerLinkActive]="['is-active']">📚 <span class="is-hidden-mobile"> Home </span></a>
+    <a class="navbar-item is-size-4 has-text-weight-light" routerLink="/comics" [routerLinkActive]="['is-active']">📚
+      <span class="is-hidden-mobile"> Home </span>
+    </a>
 
     <div style="display: flex; flex-direction: column; justify-content: center;">
       <pou-search></pou-search>
@@ -16,7 +18,8 @@
 
   <div [ngClass]="{'is-active': isActive, 'spread-nav-menu': isActive}" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item has-text-white" [routerLink]="['/search']"> 🔍 Advanced</a>
+      <a class="navbar-item has-text-white"> 🔍 Advanced</a>
+      <a class="navbar-item has-text-white" [routerLink]="['/info']"> ️📶 Info</a>
       <div *ngIf="getBreadcrumbs(breadcrumbs).length" class="navbar-item">
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>

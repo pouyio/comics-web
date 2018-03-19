@@ -1,0 +1,88 @@
+<section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">Info</h1>
+      <h2 class="subtitle">Last updated: 📅</h2>
+    </div>
+  </div>
+</section>
+
+<section class="section" *ngIf="$info | async | select: 'info'; let info">
+
+  <div class="container-fluid">
+
+    <div class="columns is-tablet">
+
+      <div class="column">
+        <div class="tile is-ancestor">
+          <div class="tile is-vertical">
+            <div class="tile">
+              <div class="tile is-parent is-vertical is-4">
+
+                <article class="tile is-child notification is-link content has-text-centered" (click)="showTotal = !showTotal">
+                  <p class="title is-marginless">Comics {{showTotal ? '⤵️' : '⤴️'}}</p>
+                  <p class="big-text" *ngIf="showTotal"> {{info.comics.ongoing + info.comics.completed | number}} </p>
+                  <span *ngIf="!showTotal">
+                    <p>Ongoing 🏗: {{info.comics.ongoing | number}}</p>
+                    <p>Completed 🏛: {{info.comics.completed | number}}</p>
+                  </span>
+                </article>
+
+              </div>
+
+              <div class="tile is-parent is-4">
+
+                <article class="tile is-child notification is-white content has-text-centered">
+                  <p class="title is-marginless">Issues</p>
+                  <p class="big-text">{{info.issues | number}}</p>
+                </article>
+
+              </div>
+
+              <div class="tile is-parent is-4">
+
+                <article class="tile is-child notification is-success content has-text-centered">
+                  <p class="title is-marginless">Publishers</p>
+                  <p class="big-text">{{info.publishers | number}}</p>
+                </article>
+
+              </div>
+
+            </div>
+
+            <div class="tile">
+              <div class="tile is-parent is-4">
+
+                <article class="tile is-child notification is-dark content has-text-centered">
+                  <p class="title is-marginless">Writers</p>
+                  <p class="big-text">{{info.writers | number}}</p>
+                </article>
+
+              </div>
+
+              <div class="tile is-parent is-4">
+
+                <article class="tile is-child notification is-warning content has-text-centered">
+                  <p class="title is-marginless">Artists</p>
+                  <p class="big-text">{{info.artists | number}}</p>
+                </article>
+
+              </div>
+              <div class="tile is-parent is-4">
+
+                <article class="tile is-child notification is-danger content has-text-centered">
+                  <p class="title is-marginless">Genres</p>
+                  <p class="big-text">{{info.genres | number}}</p>
+                </article>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

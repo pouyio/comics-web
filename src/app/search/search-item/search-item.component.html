@@ -19,7 +19,7 @@
 
     <div class="tile is-child has-text-centered">
       <p class="has-text-weight-bold is-size-4-tablet" >{{comic.title}}</p>
-      <p class="is-size-7">✈️ {{comic.status}}</p>
+      <p class="is-size-7">{{comic.status === 'Completed' ? '🏛' : '🏗'}} {{comic.status}}</p>
     </div>
     
     <div class="tile is-child">

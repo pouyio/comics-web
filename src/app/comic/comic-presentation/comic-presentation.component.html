@@ -17,7 +17,7 @@
           <input type="checkbox" name="switchRounded" class="switch is-rounded" [checked]="comic.wish">
           <label for="switchRounded">{{comic.wish ? 'Following': 'Follow'}}</label>
         </div>
-        <span class="tag is-rounded" [ngClass]="comic.status === 'Completed' ? 'is-primary': 'is-warning'">✈️ {{comic.status}}</span>
+        <span class="tag is-rounded" [ngClass]="comic.status === 'Completed' ? 'is-primary': 'is-warning'">{{comic.status === 'Completed' ? '🏛' : '🏗'}} {{comic.status}}</span>
       </h2>
 
     </div>

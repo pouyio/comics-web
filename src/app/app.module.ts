@@ -30,6 +30,8 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { environment } from '../environments/environment';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { SearchItemComponent } from './search/search-item/search-item.component';
+import { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { SearchItemComponent } from './search/search-item/search-item.component'
     HomeItemComponent,
     ComicPresentationComponent,
     IssuePresentationComponent,
-    SearchItemComponent
+    SearchItemComponent,
+    AdvancedSearchComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
