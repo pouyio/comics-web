@@ -1,7 +1,7 @@
 <nav *ngIf="logged" class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
 
   <div class="navbar-brand">
-    <a class="navbar-item is-size-4 has-text-weight-light" routerLink="/comics" [routerLinkActive]="['is-active']">📚
+    <a class="navbar-item is-size-4 has-text-weight-light" (click)="goTo('/comics')" [routerLinkActive]="['is-active']">📚
       <span class="is-hidden-mobile"> Home </span>
     </a>
 
@@ -9,7 +9,7 @@
       <pou-search></pou-search>
     </div>
 
-    <div class="navbar-burger burger" [ngClass]="{'is-active': isActive}" (click)="isActive = !isActive">
+    <div class="navbar-burger burger" [ngClass]="{'is-active': isActive}" (click)="toggleActive()">
       <span></span>
       <span></span>
       <span></span>
@@ -18,13 +18,13 @@
 
   <div [ngClass]="{'is-active': isActive, 'spread-nav-menu': isActive}" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item has-text-white"> 🔍 Advanced</a>
-      <a class="navbar-item has-text-white" [routerLink]="['/info']"> ️📶 Info</a>
+      <a class="navbar-item has-text-white" (click)="goTo('/search')"> 🔍 Advanced</a>
+      <a class="navbar-item has-text-white" (click)="goTo('/info')"> ️📶 Info</a>
       <div *ngIf="getBreadcrumbs(breadcrumbs).length" class="navbar-item">
         <nav class="breadcrumb" aria-label="breadcrumbs">
           <ul>
             <li *ngFor="let breadcrumb of getBreadcrumbs(breadcrumbs)">
-              <a class="has-text-white" [routerLink]="breadcrumb.url">{{breadcrumb.title}}</a>
+              <a class="has-text-white" (click)="goTo(breadcrumb.url)">{{breadcrumb.title}}</a>
             </li>
           </ul>
         </nav>

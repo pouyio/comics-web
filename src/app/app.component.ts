@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  isActive: boolean;
   logged: Boolean;
   resolving: Observable<Boolean>;
   subscription: Subscription;
@@ -58,6 +59,15 @@ export class AppComponent implements OnInit {
   logout = () => {
     this.logged = false;
     this.api.logout();
+  }
+
+  toggleActive() {
+    this.isActive = !this.isActive;
+  }
+
+  goTo(route) {
+    this.router.navigate([route]);
+    this.isActive = false;
   }
 
 
