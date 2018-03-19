@@ -7,7 +7,7 @@
   
   <h1 style="font-size: 1.1em" class="has-text-weight-bold">{{comic.title}}</h1>
   <small>
-    <span class="small tag is-rounded" [ngClass]="[comic.status === 'Completed' ? 'is-dark' : 'is-warning']">{{comic.status === 'Completed' ? '🏛' : '🏗'}} {{comic.status}}</span>
+    <span class=" to-corner to-left small tag is-rounded" [ngClass]="[comic.status === 'Completed' ? 'is-black' : 'is-dark']">{{comic.status === 'Completed' ? '🏛' : '🏗'}} {{comic.status}}</span>
   </small>
 
 </div>

@@ -11,7 +11,7 @@
   <div class="container-fluid">
 
     <div class="columns is-mobile is-variable is-1 is-multiline is-centered">
-      <div class="column is-one-quarter-tablet is-one-third-mobile" *ngFor="let comic of $comics | async | select: 'comics'">
+      <div class="column is-one-quarter-tablet is-half-mobile" *ngFor="let comic of $comics | async | select: 'comics'">
         <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>
       </div>
     </div>
