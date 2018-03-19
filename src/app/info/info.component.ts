@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'pou-info',
@@ -11,15 +12,19 @@ import { Apollo } from 'apollo-angular';
       font-size: 3.2rem;
     }
     `
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoComponent implements OnInit {
 
   $info: any;
   showTotal = true;
+  showTime = true;
+  daysSinceLastUpdate: string;
 
   private infoQuery = gql`{
     info {
+      last_update
       genres
       writers
       publishers
@@ -36,7 +41,19 @@ export class InfoComponent implements OnInit {
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
-    this.$info = this.apollo.query({ query: this.infoQuery }).share();
+    this.$info = this.apollo.query({ query: this.infoQuery })
+      .share()
+      .do(({ data }: any) => this.setDaysSinceLastUpdate(data.info.last_update));
+  }
+
+  setDaysSinceLastUpdate(date) {
+    const duration = (new Date().getTime() - new Date(date).getTime());
+    const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    const days = Math.floor((duration / (1000 * 60 * 60 * 24)));
+
+    this.daysSinceLastUpdate = days ?
+      `${days} days and ${hours} hours` :
+      `${hours} hours`;
   }
 
 }
