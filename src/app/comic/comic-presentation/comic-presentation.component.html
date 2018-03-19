@@ -54,19 +54,19 @@
                   <p class="title is-marginless">Info</p>
                   <ul>
                     <li>
-                      <strong>Artist</strong>:
+                      <strong>Artists</strong>:
                       <span *ngFor="let artist of comic.artists">
                         {{artist.first_name}} {{artist.last_name}}
                       </span>
                     </li>
                     <li>
-                      <strong>Publisher</strong>:
+                      <strong>Publishers</strong>:
                       <span *ngFor="let publisher of comic.publishers">
                         {{publisher.name}}
                       </span>
                     </li>
                     <li>
-                      <strong>Writer</strong>
+                      <strong>Writers</strong>
                       <span *ngFor="let writer of comic.writers">
                         {{writer.first_name}} {{writer.last_name}}
                       </span>
@@ -101,6 +101,7 @@
         <div class="tile is-acenstor">
           <article class="tile is-child notification is-success" style="padding-right: .6em">
             <p class="title is-marginless">Issues ({{orderedIssues.length}})</p>
+            <small>Updated: {{comic.last_update | date: 'longDate'}}</small>
             <ul [ngClass]="{'no-overflow': currentWidth > mobileWidth}">
               <li *ngFor="let issue of orderedIssues" style="margin: .2em">
                 <div class="is-flex" style="align-items: center; justify-content: space-between">

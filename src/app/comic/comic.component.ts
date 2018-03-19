@@ -17,6 +17,7 @@ export class ComicComponent {
     comic (_id: $comicId) { 
       _id
       title
+      last_update
       publication_date
       status
       summary
