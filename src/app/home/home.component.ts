@@ -11,8 +11,17 @@ import gql from 'graphql-tag';
 export class HomeComponent implements OnInit {
 
   $comics;
+  selectedTab = 'home';
+
   private comicsQuery = gql`{ 
-    comics (wish: true) { 
+    wished: comics (wish: true) { 
+      _id
+      title
+      wish
+      cover
+      status
+    },
+    lastUpdated: comics (onlyNew: true) {
       _id
       title
       wish
@@ -34,7 +43,10 @@ export class HomeComponent implements OnInit {
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
-    this.$comics = this.apollo.watchQuery({ query: this.comicsQuery }).valueChanges.share();
+    this.$comics = this.apollo.watchQuery({ query: this.comicsQuery })
+      .valueChanges
+      .pluck('data')
+      .share();
   }
 
   toggleComicWish = (comic) => {

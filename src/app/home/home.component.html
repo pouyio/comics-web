@@ -1,20 +1,47 @@
-<section class="hero is-primary is-bold">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title">My Collection</h1>
-      <h2 class="subtitle">Following {{($comics | async)?.length}} comics 🤖</h2>
-    </div>
-  </div>
-</section>
+<ng-container *ngIf="$comics | async; let comics">
 
-<section class="section">
-  <div class="container-fluid">
-
-    <div class="columns is-mobile is-variable is-1 is-multiline is-centered">
-      <div class="column is-one-quarter-tablet is-half-mobile" *ngFor="let comic of $comics | async | select: 'comics'">
-        <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">My Collection</h1>
       </div>
     </div>
+    <div class="hero-foot">
+      <nav class="tabs is-boxed is-fullwidth">
+        <div class="container">
+          <ul>
+            <li [ngClass]="{'is-active': selectedTab === 'home'}" (click)="selectedTab = 'home'">
+              <a>
+                Following &nbsp;
+                <span class="tag is-rounded"> {{comics.wished.length}}</span>
+              </a>
+            </li>
+            <li [ngClass]="{'is-active': selectedTab === 'new'}" (click)="selectedTab = 'new'">
+              <a>New &nbsp;
+                <span class="tag is-rounded is-success"> {{comics.lastUpdated.length}}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
 
-  </div>
-</section> 
+  <section class="section">
+    <div class="container-fluid">
+
+      <div *ngIf="selectedTab === 'home'" class="columns is-mobile is-variable is-1 is-multiline is-centered">
+        <div class="column is-one-quarter-tablet is-half-mobile" *ngFor="let comic of comics.wished">
+          <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>
+        </div>
+      </div>
+      
+      <div *ngIf="selectedTab === 'new'" class="columns is-mobile is-variable is-1 is-multiline is-centered">
+        <div class="column is-one-quarter-tablet is-half-mobile" *ngFor="let comic of comics.lastUpdated">
+          <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</ng-container>
