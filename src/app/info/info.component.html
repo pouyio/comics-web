@@ -3,10 +3,10 @@
   <section class="hero is-primary is-bold">
     <div class="hero-body">
       <div class="container has-text-centered" (click)="showTime = !showTime">
-        <h1 class="title">Info {{showTime ? '⤵️' : '⤴️'}}</h1>
-        <h2 class="subtitle" >{{showTime ? '⏱' : '📅'}} Updated
+        <h1 class="title">Info {{showTime ? '🔽' : '🔼'}}</h1>
+        <h2 class="subtitle">{{showTime ? '⏱' : '📅'}} Updated
           <span *ngIf="showTime">
-             {{daysSinceLastUpdate}} ago
+            {{daysSinceLastUpdate}} ago
           </span>
           <span *ngIf="!showTime">
             on {{info.last_update | date}}
@@ -29,7 +29,7 @@
                 <div class="tile is-parent is-vertical is-4">
 
                   <article class="tile is-child notification is-link content has-text-centered" (click)="showTotal = !showTotal">
-                    <p class="title is-marginless">Comics {{showTotal ? '⤵️' : '⤴️'}}</p>
+                    <p class="title is-marginless">Comics {{showTotal ? '🔽' : '🔼'}}</p>
                     <p class="big-text" *ngIf="showTotal"> {{info.comics.ongoing + info.comics.completed | number}} </p>
                     <span *ngIf="!showTotal">
                       <p>Ongoing 🏗: {{info.comics.ongoing | number}}</p>
@@ -85,6 +85,13 @@
                   </article>
 
                 </div>
+              </div>
+
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-dark content has-text-centered" (click)="showLog = !showLog">
+                  <p class="title is-marginless">Log {{showLog ? '🔽' : '🔼'}}</p>
+                  <p *ngIf="showLog" style="white-space: pre-wrap;" class="has-text-left is-size-7">{{log$ | async}}</p>
+                </article>
               </div>
 
             </div>

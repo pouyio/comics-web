@@ -16,6 +16,8 @@ export class ApiService extends BaseService {
 
   logout = () => this.auth.removeToken();
 
+  getLog = (): Observable<string> => this.http.get(`${this.baseUrl}/log`, {responseType: 'text'});
+
   getComic(id: string): Observable<any> {
     this.resolver.setState(true);
     return this.http.get(`${this.baseUrl}/comic/${id}`)
