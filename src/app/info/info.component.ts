@@ -10,7 +10,7 @@ import { ApiService } from '../api.service';
   styles: [
     `
     .big-text {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
     }
     `
   ],
