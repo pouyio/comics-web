@@ -16,8 +16,8 @@
     </div>
   </div>
 
-  <div [ngClass]="{'is-active': isActive, 'spread-nav-menu': isActive}" class="navbar-menu">
-    <div class="navbar-start">
+  <div [class.is-active]="isActive" class="navbar-menu">
+    <div class="navbar-start has-text-centered">
       <a class="navbar-item has-text-white" (click)="goTo('/search')"> 🔍 Advanced</a>
       <a class="navbar-item has-text-white" (click)="goTo('/info')"> ️📶 Info</a>
       <div *ngIf="getBreadcrumbs(breadcrumbs).length" class="navbar-item">
@@ -30,7 +30,7 @@
         </nav>
       </div>
     </div>
-    <div class="navbar-end">
+    <div class="navbar-end has-text-centered">
       <a class="navbar-item has-text-white" (click)="logout()"> ❌ Logout</a>
     </div>
   </div>
