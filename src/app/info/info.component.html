@@ -90,7 +90,7 @@
               <div class="tile is-parent">
                 <article class="tile is-child notification is-dark content has-text-centered" (click)="showLog = !showLog">
                   <p class="title is-marginless">Log {{showLog ? '🔽' : '🔼'}}</p>
-                  <p *ngIf="showLog" style="white-space: pre-wrap; max-height: 200px; overflow: auto;" class="has-text-left is-size-7">{{log$ | async}}</p>
+                  <p *ngIf="showLog" style="white-space: pre-wrap; max-height: 200px; overflow: auto;" class="has-text-left is-size-7">{{log$ | async | select: 'log'}}</p>
                 </article>
               </div>
 

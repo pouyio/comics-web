@@ -23,7 +23,7 @@ export class InfoComponent implements OnInit {
   showTime = true;
   showLog = false;
   daysSinceLastUpdate: string;
-  log$: Observable<string>;
+  log$: Observable<{}>;
 
   private infoQuery = gql`{
     info {
@@ -48,7 +48,7 @@ export class InfoComponent implements OnInit {
       .share()
       .do(({ data }: any) => this.setDaysSinceLastUpdate(data.info.last_update));
 
-    this.log$ = this.apiService.getLog();
+    this.log$ = this.apollo.query({ query: gql`{log}` }).shareReplay();
   }
 
   setDaysSinceLastUpdate(date) {
