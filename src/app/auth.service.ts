@@ -8,10 +8,10 @@ export class AuthService {
 
   constructor(private router: Router) {
     this.token = localStorage.getItem('token');
- }
+  }
 
   getToken = (): string => {
-    if(this.token) return this.token;
+    if (this.token) return this.token;
     return localStorage.getItem('token') || '';
   }
 
