@@ -9,7 +9,7 @@
             {{daysSinceLastUpdate}} ago
           </span>
           <span *ngIf="!showTime">
-            on {{info.last_update | date}}
+            on {{info.last_update | date: 'medium'}}
           </span>
         </h2>
       </div>
