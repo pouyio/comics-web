@@ -4,14 +4,15 @@
     <div class="cover-background-child" [style.backgroundImage]="'url('+ comic.cover +')'"></div>
   </div>
 
-  <small>
-    <span class=" to-corner to-left small tag is-rounded" [ngClass]="[comic.status === 'Completed' ? 'is-black' : 'is-dark']">{{comic.status === 'Completed' ? '🏛' : '🏗'}} {{comic.status}}</span>
-  </small>
-
-  <div class="field to-corner to-right" (click)="toggleButton.emit(comic); $event.stopPropagation()">
-    <input id="switch" type="checkbox" name="switch" class="switch is-rounded" [checked]="comic.wish">
-    <label for="switch"></label>
+  <div class="to-corner is-flex">
+    <div class="tag is-rounded" [ngClass]="[comic.status === 'Completed' ? 'is-black' : 'is-dark']">{{comic.status === 'Completed' ? '🏛' : '🏗'}} {{comic.status}}</div>
+  
+    <div (click)="toggleButton.emit(comic); $event.stopPropagation()">
+      <input id="switch" type="checkbox" name="switch" class="switch is-rounded" [checked]="comic.wish">
+      <label for="switch"></label>
+    </div>
   </div>
+
 
   <h1 style="font-size: 1.1em; z-index: 10" class="has-text-weight-bold">{{comic.title}}</h1>
 

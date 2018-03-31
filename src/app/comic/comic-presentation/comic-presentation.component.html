@@ -8,7 +8,9 @@
 
       <p class="tags is-centered">
         <span class="tag is-rounded" *ngFor="let genre of comic.genres">
-          {{ genre.name }}
+          <a [routerLink]="['/search']" [queryParams]="{genres: genre.id}">
+            {{ genre.name }}
+          </a>
         </span>
       </p>
 

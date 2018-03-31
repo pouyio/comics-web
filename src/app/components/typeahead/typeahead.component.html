@@ -1,0 +1,10 @@
+<ng-container *ngIf="source | async; let entities">
+  <div class="vbta-menu" *ngIf="entities.length">
+    <ul class="is-marginless">
+      <li class="vbta-suggestion" *ngFor="let entity of entities" (click)="onClick(entity)">
+        <span *ngIf="entity.first_name"><strong>{{entity.first_name}}</strong> {{entity.last_name}}</span>
+        <span *ngIf="entity.name">{{entity.name}}</span>
+      </li>
+    </ul>
+  </div>
+</ng-container>

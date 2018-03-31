@@ -13,7 +13,7 @@
             <li [ngClass]="{'is-active': selectedTab === 'home'}" (click)="selectedTab = 'home'">
               <a>
                 Following &nbsp;
-                <span class="tag is-rounded"> {{comics.wished.length}}</span>
+                <span class="tag is-rounded is-info"> {{comics.wished.length}}</span>
               </a>
             </li>
             <li [ngClass]="{'is-active': selectedTab === 'new'}" (click)="selectedTab = 'new'">
@@ -35,7 +35,7 @@
           <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>
         </div>
       </div>
-      
+
       <div *ngIf="selectedTab === 'new'" class="columns is-mobile is-variable is-1 is-multiline is-centered">
         <div class="column is-one-quarter-tablet is-half-mobile" *ngFor="let comic of comics.lastUpdated">
           <pou-home-item [comic]="comic" (toggleButton)="toggleComicWish($event)"></pou-home-item>

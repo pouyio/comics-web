@@ -6,7 +6,12 @@ import gql from 'graphql-tag';
 
 @Component({
   selector: 'pou-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  styles: [`
+  li.is-active > a {
+    background-color: whitesmoke !important ;
+  }
+  `]
 })
 export class HomeComponent implements OnInit {
 
@@ -32,7 +37,7 @@ export class HomeComponent implements OnInit {
   `;
 
   private markComicWish = gql`
-  mutation ($comicId: String!, $wish: Boolean!) {
+  mutation ($comicId: ID!, $wish: Boolean!) {
     markComicWish(_id: $comicId, wish: $wish) {
       _id
       wish

@@ -1,3 +1,69 @@
-<p>
-  advanced-search works!
-</p>
+<div class="section">
+
+  <div class="content" [formGroup]="rForm">
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Text</label>
+      </div>
+
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input formControlName="text" class="input" type="text" placeholder="Search text...">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input formControlName="number" class="input" type="number" placeholder="Minimun n issues...">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <pou-entity-form formControlName="publishers" type="publishers" (toggleEntity)="toggleEntity($event)" [selectedEntities]="getEntities('publishers')"></pou-entity-form>
+    
+    <pou-entity-form formControlName="writers" type="writers" (toggleEntity)="toggleEntity($event)" [selectedEntities]="getEntities('writers')"></pou-entity-form>
+    
+    <pou-entity-form formControlName="artists" type="artists" (toggleEntity)="toggleEntity($event)" [selectedEntities]="getEntities('artists')"></pou-entity-form>
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">
+          Genres
+        </label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="tags" *ngIf="genres$ | async; let genres">
+            <span [ngClass]="[queryParamsContains('genres', genre.id) ? 'is-white' : 'is-dark']" class="tag is-rounded button" *ngFor="let genre of genres"
+              (click)="onSelect('genres', genre.id)">
+              {{genre.name}} &nbsp;
+              <span> {{queryParamsContains('genres', genre.id) ? '𐄂' : '✔'}} </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-horizontal is-grouped is-grouped-centered">
+      <p class="control is-expanded">
+        <button style="width: 100%" class="button is-danger" (click)="reset()">
+          Reset
+        </button>
+      </p>
+    </div>
+
+    <h1>Results</h1>
+    <ul *ngIf="comics$ | async; let comics">
+      <li *ngFor="let comic of comics">
+        <a [routerLink]="['/comic', comic._id]">
+          {{comic.title}}
+        </a>
+        <!-- {{comic | json}} -->
+      </li>
+    </ul>
+
+  </div>
+</div>

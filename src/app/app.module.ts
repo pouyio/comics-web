@@ -32,6 +32,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { SearchItemComponent } from './search/search-item/search-item.component';
 import { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
 import { InfoComponent } from './info/info.component';
+import { TypeaheadComponent } from './components/typeahead/typeahead.component';
+import { EntityResolverPipe } from './pipes/entity-resolver.pipe';
+import { EntityFormComponent } from './components/entity-form/entity-form.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { InfoComponent } from './info/info.component';
     SearchItemComponent,
     AdvancedSearchComponent,
     InfoComponent,
+    TypeaheadComponent,
+    EntityResolverPipe,
+    EntityFormComponent,
   ],
   imports: [
     BrowserModule,

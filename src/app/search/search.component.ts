@@ -31,10 +31,10 @@ export class SearchComponent {
   `;
 
   private markComicWish = gql`
-  mutation ($comicId: String!, $wish: Boolean!) {
+  mutation ($comicId: ID!, $wish: Boolean!) {
     markComicWish(_id: $comicId, wish: $wish) {
       _id
-      wishs
+      wish
     }
   }
   `;

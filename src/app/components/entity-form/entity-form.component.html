@@ -1,0 +1,28 @@
+<div class="field is-horizontal">
+
+  <div class="field-label">
+    <label class="label is-capitalized">{{type}}</label>
+  </div>
+
+  <div class="field-body">
+    <div class="field">
+      <input [(ngModel)]="_value" (input)="onChange($event)" class="input" type="text" [placeholder]="'Search ' + type + ' ...'">
+      <pou-typeahead *ngIf="_value" [source]="source$" (onClicked)="onToggleEntity($event.id)"></pou-typeahead>
+    </div>
+  </div>
+
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label"></div>
+  <div class="field-body">
+
+    <div class="field">
+      <div class="tags">
+        <span class="tag is-rounded button is-white" *ngFor="let entityId of selectedEntities" (click)="onToggleEntity(entityId)">
+          {{ entityId | entityResolver: singleType | async}} &nbsp; 𐄂
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

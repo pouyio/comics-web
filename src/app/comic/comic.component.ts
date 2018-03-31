@@ -13,7 +13,7 @@ export class ComicComponent {
 
   comic$: Observable<any>;
   private comicQuery = gql`
-  query comic($comicId: String!) { 
+  query comic($comicId: ID!) { 
     comic (_id: $comicId) { 
       _id
       title
@@ -43,6 +43,7 @@ export class ComicComponent {
         last_name
       }
       genres {
+        id
         name
       }
     }
@@ -50,7 +51,7 @@ export class ComicComponent {
   `;
 
   private markComicWish = gql`
-  mutation ($comicId: String!, $wish: Boolean!) {
+  mutation ($comicId: ID!, $wish: Boolean!) {
     markComicWish(_id: $comicId, wish: $wish) {
       _id
       wish
@@ -59,7 +60,7 @@ export class ComicComponent {
   `;
 
   private updateIssueRead = gql`
-  mutation ($comicId: String!, $issueId: String!, $isRead: Boolean! ) {
+  mutation ($comicId: ID!, $issueId: String!, $isRead: Boolean! ) {
     updateIssue(_id: $comicId, issue: $issueId, isRead: $isRead) {
       _id
       __typename

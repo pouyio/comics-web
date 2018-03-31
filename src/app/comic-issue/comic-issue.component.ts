@@ -35,7 +35,7 @@ export class ComicIssueComponent implements OnInit {
 
   private getIssue = params => this.apollo.watchQuery({
     query: gql`
-    query IssueDetail($comic: String!, $issue: String!) { 
+    query IssueDetail($comic: ID!, $issue: String!) { 
       comic(_id: $comic) {
         _id
         __typename
