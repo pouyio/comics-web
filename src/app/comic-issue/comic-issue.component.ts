@@ -13,7 +13,7 @@ export class ComicIssueComponent implements OnInit {
   id: string;
 
   private updateQuery = gql`
-  mutation ($comic: String!, $issue: String!, $page: Int!) {
+  mutation ($comic: ID!, $issue: String!, $page: Int!) {
     updateIssue(_id: $comic, issue: $issue, page: $page) {
       _id
       __typename
