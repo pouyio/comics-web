@@ -28,10 +28,10 @@
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
         <ul>
-          <li [ngClass]="{'is-active': selectedTab === 'general'}" (click)="selectedTab = 'general'">
+          <li [ngClass]="{'is-active': selectedTab === 'general'}" (click)="onSelectTab('general')">
             <a>General</a>
           </li>
-          <li [ngClass]="{'is-active': selectedTab === 'issues'}" (click)="selectedTab = 'issues'">
+          <li [ngClass]="{'is-active': selectedTab === 'issues'}" (click)="onSelectTab('issues')">
             <a>Issues</a>
           </li>
         </ul>

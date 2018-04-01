@@ -3,6 +3,7 @@ import { Observable } from 'apollo-link';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'pou-home',
@@ -45,13 +46,16 @@ export class HomeComponent implements OnInit {
   }
   `;
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.$comics = this.apollo.watchQuery({ query: this.comicsQuery })
       .valueChanges
       .pluck('data')
       .share();
+
+    this.route.queryParams.pluck('tab').filter((tab: string) => !!tab).subscribe((tab: string) => this.selectedTab = tab);
+
   }
 
   toggleComicWish = (comic) => {
@@ -71,6 +75,10 @@ export class HomeComponent implements OnInit {
         },
       },
     }).subscribe();
+  }
+
+  selectTab(tab) {
+    this.router.navigate([], { relativeTo: this.route, queryParams: { tab } });
   }
 
 }

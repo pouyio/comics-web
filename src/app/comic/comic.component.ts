@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
@@ -9,9 +9,11 @@ import { Observable } from 'rxjs/Observable';
   selector: 'pou-comic',
   templateUrl: './comic.component.html'
 })
-export class ComicComponent {
+export class ComicComponent implements OnInit {
 
   comic$: Observable<any>;
+  selectedTab = 'general';
+  
   private comicQuery = gql`
   query comic($comicId: ID!) { 
     comic (_id: $comicId) { 
@@ -75,11 +77,16 @@ export class ComicComponent {
   `;
 
 
-  constructor(private route: ActivatedRoute, private apollo: Apollo) {
+  constructor(private route: ActivatedRoute, private router: Router, private apollo: Apollo) {
 
     this.comic$ = this.route.params.switchMap(({id}) => this.apollo.watchQuery({
       query: this.comicQuery, variables: { comicId: id }
     }).valueChanges);
+
+  }
+
+  ngOnInit() {
+    this.route.queryParams.pluck('tab').filter((tab: string) => !!tab).subscribe((tab: string) => this.selectedTab = tab);
   }
 
   toggleWish = (comic) => {
@@ -109,6 +116,10 @@ export class ComicComponent {
         isRead: event.val
       }
     }).subscribe();
+  }
+
+  onSelectTab(tab) {
+    this.router.navigate([], { relativeTo: this.route, queryParams: { tab } });
   }
 
 }

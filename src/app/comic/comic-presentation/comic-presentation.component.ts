@@ -9,10 +9,11 @@ import { Observable } from 'rxjs/Observable';
 export class ComicPresentationComponent implements OnChanges {
 
   @Input() comic;
+  @Input() selectedTab;
   @Output() toggleWish = new EventEmitter();
   @Output() markIssueRead = new EventEmitter();
+  @Output() selectTab = new EventEmitter();
   orderedIssues;
-  selectedTab = 'general';
   zoomed = false;
   currentWidth: number = window.innerWidth;
   mobileWidth = 600;
@@ -29,6 +30,7 @@ export class ComicPresentationComponent implements OnChanges {
   }
 
   ngOnChanges(changes) {
+    if (!changes.comic) return;
     this.orderedIssues = this._sortIssues([...changes.comic.currentValue.issues]);
   }
 
@@ -56,6 +58,10 @@ export class ComicPresentationComponent implements OnChanges {
     return issues.sort((a, b) => {
       return a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' });
     });
+  }
+
+  onSelectTab(tab) {
+    this.selectTab.emit(tab);
   }
 
 }

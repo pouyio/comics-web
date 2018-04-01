@@ -10,13 +10,13 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li [ngClass]="{'is-active': selectedTab === 'home'}" (click)="selectedTab = 'home'">
+            <li [ngClass]="{'is-active': selectedTab === 'home'}" (click)="selectTab('home')">
               <a>
                 Following &nbsp;
                 <span class="tag is-rounded is-info"> {{comics.wished.length}}</span>
               </a>
             </li>
-            <li [ngClass]="{'is-active': selectedTab === 'new'}" (click)="selectedTab = 'new'">
+            <li [ngClass]="{'is-active': selectedTab === 'new'}" (click)="selectTab('new')">
               <a>New &nbsp;
                 <span class="tag is-rounded is-success"> {{comics.lastUpdated.length}}</span>
               </a>
