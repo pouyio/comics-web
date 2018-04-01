@@ -29,7 +29,7 @@ export class AdvancedSearchComponent implements OnInit {
     private fb: FormBuilder) {
 
     this.rForm = this.fb.group({
-      text: this.route.snapshot.queryParams.search,
+      search: this.route.snapshot.queryParams.search,
       number: this.route.snapshot.queryParams.numberOfIssues,
       writers: '',
       artists: '',
@@ -39,6 +39,11 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.rForm.valueChanges.pluck('search').filter(t => !!t).subscribe(search => {
+      const params = { ...this.route.snapshot.queryParams, search };
+      this.router.navigate([], { relativeTo: this.route, queryParams: params });
+    });
 
 
     this.genres$ = this.apollo.query({ query: queryFactory('genres') }).pluck('data').pluck('genres');
