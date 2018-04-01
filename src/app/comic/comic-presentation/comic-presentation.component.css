@@ -11,4 +11,5 @@
 .no-overflow {
   overflow-y: auto;
   max-height: 63vh;
+  -webkit-overflow-scrolling: touch;
 }
