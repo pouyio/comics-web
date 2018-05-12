@@ -1,0 +1,34 @@
+:host {
+  height: 100%;
+  display: block;
+}
+
+img {
+  height: 100%;
+}
+
+.rotating {
+  position: absolute;
+  top: calc(50% - .7em);
+  right: calc(50% - .5em);
+  font-size: 7em;
+  animation: rotating 3s linear infinite;
+}
+
+@-webkit-keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-360deg);
+    }
+  }

@@ -2,8 +2,8 @@
   <div class="tile is-vertical is-4">
     <div class="tile is-parent is-paddingless">
       <article class="tile is-child">
-        <figure class="image">
-          <img [src]="comic.cover" alt="cover">
+        <figure class="image" style="height:100%">
+          <pou-slow-image [src]="comic.cover"></pou-slow-image>
 
           <div class="field to-corner to-right" (click)="onToggleWish.emit(comic)">
             <input id="switch" type="checkbox" name="switch" class="switch is-rounded" [checked]="comic.wish">

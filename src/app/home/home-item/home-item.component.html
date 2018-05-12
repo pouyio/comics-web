@@ -1,7 +1,9 @@
 <div [routerLink]="['/comic', comic._id]" style="min-height: 15.25rem" class="box has-text-white is-flex flex-container relative">
 
   <div class="cover-background-parent">
-    <div class="cover-background-child" [style.backgroundImage]="'url('+ comic.cover +')'"></div>
+    <div class="cover-background-child">
+      <pou-slow-image [src]="comic.cover"></pou-slow-image>
+    </div>
   </div>
 
   <div class="to-corner is-flex">

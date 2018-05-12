@@ -35,6 +35,7 @@ import { InfoComponent } from './info/info.component';
 import { TypeaheadComponent } from './components/typeahead/typeahead.component';
 import { EntityResolverPipe } from './pipes/entity-resolver.pipe';
 import { EntityFormComponent } from './components/entity-form/entity-form.component';
+import { SlowImageComponent } from './components/slow-image/slow-image.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { EntityFormComponent } from './components/entity-form/entity-form.compon
     TypeaheadComponent,
     EntityResolverPipe,
     EntityFormComponent,
+    SlowImageComponent,
   ],
   imports: [
     BrowserModule,

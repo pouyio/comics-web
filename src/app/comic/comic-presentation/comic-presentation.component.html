@@ -80,8 +80,10 @@
               <div class="tile is-parent is-4">
 
                 <article class="tile is-child">
-                  <figure class="image">
-                    <img (click)="toggleZoomIn()" [ngClass]="{'zoomIn': zoomed}" class="img-fluid zoomable" [src]="comic.cover" alt="cover" style="border-radius: 3px">
+                  <figure class="image" style="height:100%; min-height: 150px">
+                    <div (click)="toggleZoomIn()" [ngClass]="{'zoomIn': zoomed}" class="img-fluid zoomable" style="border-radius: 3px">
+                      <pou-slow-image [src]="comic.cover"></pou-slow-image>
+                    </div>
                   </figure>
                 </article>
 
