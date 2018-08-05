@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms';
 import gql from 'graphql-tag';
@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'pou-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent {
 
@@ -23,7 +24,7 @@ export class SearchComponent {
       title
       cover
       wish
-      publication_date
+      publication
       status
       summary
     }

@@ -92,7 +92,11 @@
             <div class="tile is-parent">
 
               <article class="tile is-child notification is-info">
-                <p class="title is-marginless"> 📅 {{comic.publication_date}} </p>
+                <p class="title is-marginless"> 📅
+                  <ng-container *ngFor="let date of comic.publication; let last = last">
+                    {{ date | date : 'MMMM y' }} {{ last ? '' : ' - '}}
+                  </ng-container>
+                </p>
                 <p class="has-text-justified"> {{comic.summary}}</p>
               </article>
 

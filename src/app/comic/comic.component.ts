@@ -13,14 +13,14 @@ export class ComicComponent implements OnInit {
 
   comic$: Observable<any>;
   selectedTab = 'general';
-  
+
   private comicQuery = gql`
   query comic($comicId: ID!) { 
     comic (_id: $comicId) { 
       _id
       title
       last_update
-      publication_date
+      publication
       status
       summary
       cover
@@ -79,7 +79,7 @@ export class ComicComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private apollo: Apollo) {
 
-    this.comic$ = this.route.params.switchMap(({id}) => this.apollo.watchQuery({
+    this.comic$ = this.route.params.switchMap(({ id }) => this.apollo.watchQuery({
       query: this.comicQuery, variables: { comicId: id }
     }).valueChanges);
 

@@ -23,7 +23,11 @@
     </div>
     
     <div class="tile is-child">
-      <p class="has-text-centered is-size-7-mobile">📅 {{comic.publication_date}}</p>
+      <p class="has-text-centered is-size-7-mobile">📅 
+        <ng-container *ngFor="let date of comic.publication; let last = last">
+          {{ date | date : 'MMMM y' }} {{ last ? '' : ' - '}}
+        </ng-container>
+      </p>
       <p class="is-size-7 has-text-justified">{{limit(comic.summary, 100)}}</p>
     </div>
 
