@@ -1,2 +1,2 @@
 <div *ngIf="loading" class="rotating">🌀</div>
-<img [hidden]="loading" [src]="src" (load)="loaded()" alt="cover">
+<img *ngIf="insideViewport" [hidden]="loading" [src]="src" (load)="loaded()" alt="cover">
