@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { FormControl } from '@angular/forms';
 import gql from 'graphql-tag';
@@ -16,6 +16,8 @@ export class SearchComponent {
   listed: Observable<any>;
   searchForm = new FormControl();
   isLoading = false;
+
+  @ViewChild('resultsList') resultsList: ElementRef;
 
   private searchQuery = gql`
   query searchComics($search: String!) {
@@ -47,8 +49,9 @@ export class SearchComponent {
   }
 
   constructor(private apollo: Apollo, private router: Router) {
+
     this.listed = this.searchForm.valueChanges
-      .debounceTime(500)
+      .debounceTime(200)
       .distinctUntilChanged()
       .do(() => this.isLoading = true)
       .switchMap(search => this.search$(search))
@@ -62,6 +65,17 @@ export class SearchComponent {
     //   .map(({ data }) => data.comics)
     //   .do(() => this.isLoading = false);
 
+  }
+
+  @HostListener('document:click', ['$event', '$event.target'])
+  onClick(event: MouseEvent, targetElement: HTMLElement) {
+    if (!targetElement || !this.resultsList) {
+      return;
+    }
+    const clickedInside = this.resultsList.nativeElement.contains(targetElement);
+    if (!clickedInside) {
+      this.searchForm.reset();
+    }
   }
 
   toggleWish = (comic) => {

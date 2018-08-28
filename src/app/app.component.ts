@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
         url = `${acc[acc.length - 1].url}/${title}`;
       }
       const obj = { url, title };
-      acc.push(obj)
+      acc.push(obj);
       return acc;
     }, []);
   }
