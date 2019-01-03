@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
 import { ActivatedRoute, Router } from '@angular/router';
+import { pluck, share, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'pou-home',
@@ -51,10 +52,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.$comics = this.apollo.watchQuery({ query: this.comicsQuery })
       .valueChanges
-      .pluck('data')
-      .share();
+      .pipe(
+        pluck('data'),
+        share()
+        );
 
-    this.route.queryParams.pluck('tab').filter((tab: string) => !!tab).subscribe((tab: string) => this.selectedTab = tab);
+    this.route.queryParams.pipe(pluck('tab'), filter((tab: string) => !!tab)).subscribe((tab: string) => this.selectedTab = tab);
 
   }
 

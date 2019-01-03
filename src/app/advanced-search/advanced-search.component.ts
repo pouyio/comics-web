@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { pluck, filter, switchMap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   searchQuery,
@@ -40,17 +40,17 @@ export class AdvancedSearchComponent implements OnInit {
 
   ngOnInit() {
 
-    this.rForm.valueChanges.pluck('search').filter(t => !!t).subscribe(search => {
+    this.rForm.valueChanges.pipe(pluck('search'), filter(t => !!t)).subscribe(search => {
       const params = { ...this.route.snapshot.queryParams, search };
       this.router.navigate([], { relativeTo: this.route, queryParams: params });
     });
 
 
-    this.genres$ = this.apollo.query({ query: queryFactory('genres') }).pluck('data').pluck('genres');
+    this.genres$ = this.apollo.query({ query: queryFactory('genres') }).pipe(pluck('data'), pluck('genres'));
 
-    this.comics$ = this.route.queryParams.switchMap((params: any) => {
-      return this.apollo.query({ query: searchQuery, variables: params }).pluck('data').pluck('comics');
-    });
+    this.comics$ = this.route.queryParams.pipe(switchMap((params: any) => {
+      return this.apollo.query({ query: searchQuery, variables: params }).pipe(pluck('data'), pluck('comics'));
+    }));
 
   }
 

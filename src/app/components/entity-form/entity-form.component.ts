@@ -1,8 +1,9 @@
 import { Component, Input, forwardRef, EventEmitter, Output, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { queryFactory } from '../../advanced-search/queries';
+import { pluck } from 'rxjs/operators';
 
 @Component({
   selector: 'pou-entity-form',
@@ -47,7 +48,7 @@ export class EntityFormComponent implements OnInit, ControlValueAccessor {
     const search = event.target.value;
     this._value = search;
     this.propagateChange(this._value);
-    this.source$ = this.apollo.query({ query: queryFactory(this.type), variables: { search } }).pluck('data').pluck(this.type);
+    this.source$ = this.apollo.query({ query: queryFactory(this.type), variables: { search } }).pipe(pluck('data'), pluck(this.type));
   }
 
   onToggleEntity(entityId) {

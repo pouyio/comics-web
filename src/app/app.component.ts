@@ -4,8 +4,7 @@ import { AuthService } from './auth.service';
 import { ResolveService } from './resolve.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({

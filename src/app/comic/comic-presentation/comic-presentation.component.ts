@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { fromEvent } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'pou-comic-presentation',
@@ -20,9 +21,8 @@ export class ComicPresentationComponent implements OnChanges {
 
 
   constructor() {
-    Observable
-      .fromEvent(window, 'resize')
-      .map(() => window.innerWidth)
+    fromEvent(window, 'resize').pipe(
+      map(() => window.innerWidth))
       .subscribe(w => {
         this.currentWidth = w;
         this.zoomed = false;

@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://localhost:4000/graphql',
-  rest_url: 'http://localhost:4000'
+  api_url: 'http://localhost:9000/.netlify/functions/index/graphql',
+  rest_url: 'http://localhost:9000/.netlify/functions/index'
 };

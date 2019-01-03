@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
+import { tap, share, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'pou-info',
@@ -45,10 +46,10 @@ export class InfoComponent implements OnInit {
 
   ngOnInit() {
     this.$info = this.apollo.query({ query: this.infoQuery })
-      .share()
-      .do(({ data }: any) => this.setDaysSinceLastUpdate(data.info.last_update));
+      .pipe(share(),
+      tap(({ data }: any) => this.setDaysSinceLastUpdate(data.info.last_update)));
 
-    this.log$ = this.apollo.query({ query: gql`{log}` }).shareReplay();
+    this.log$ = this.apollo.query({ query: gql`{log}` }).pipe(shareReplay());
   }
 
   setDaysSinceLastUpdate(date) {

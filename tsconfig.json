@@ -1,6 +1,10 @@
 {
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false
+  },
   "compileOnSave": false,
   "compilerOptions": {
+    "importHelpers": true,
     "skipLibCheck": true,
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
@@ -17,6 +21,7 @@
       "es2016",
       "dom",
       "esnext.asynciterable"
-    ]
+    ],
+    "module": "es2015"
   }
 }
