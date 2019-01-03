@@ -11,6 +11,7 @@ $breadcrumb-item-hover-color:	#fff;
 
 html {
   background-color: $light;
+  -webkit-overflow-scrolling: touch;
 }
 
 .navbar-menu {

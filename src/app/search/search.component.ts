@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
+import { tap, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'pou-search',
@@ -45,18 +46,18 @@ export class SearchComponent {
   private search$ = (search): Observable<any> => {
     return search ? this.apollo.watchQuery({
       query: this.searchQuery, variables: { search }
-    }).valueChanges : Observable.of({ data: { comics: [] } });
+    }).valueChanges : of({ data: { comics: [] } });
   }
 
   constructor(private apollo: Apollo, private router: Router) {
 
-    this.listed = this.searchForm.valueChanges
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .do(() => this.isLoading = true)
-      .switchMap(search => this.search$(search))
-      .map(({ data }) => data.comics)
-      .do(() => this.isLoading = false);
+    this.listed = this.searchForm.valueChanges.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      tap(() => this.isLoading = true),
+      switchMap(search => this.search$(search)),
+      map(({ data }) => data.comics),
+      tap(() => this.isLoading = false));
     // this.listed = Observable.of('spawn')
     //   .debounceTime(500)
     //   .distinctUntilChanged()

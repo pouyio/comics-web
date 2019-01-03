@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { switchMap, pluck, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'pou-comic',
@@ -79,14 +79,14 @@ export class ComicComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private apollo: Apollo) {
 
-    this.comic$ = this.route.params.switchMap(({ id }) => this.apollo.watchQuery({
+    this.comic$ = this.route.params.pipe(switchMap(({ id }) => this.apollo.watchQuery({
       query: this.comicQuery, variables: { comicId: id }
-    }).valueChanges);
+    }).valueChanges));
 
   }
 
   ngOnInit() {
-    this.route.queryParams.pluck('tab').filter((tab: string) => !!tab).subscribe((tab: string) => this.selectedTab = tab);
+    this.route.queryParams.pipe(pluck('tab'), filter((tab: string) => !!tab)).subscribe((tab: string) => this.selectedTab = tab);
   }
 
   toggleWish = (comic) => {

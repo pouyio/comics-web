@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { switchMap, tap, map, pluck } from 'rxjs/operators';
 
 @Component({
   selector: 'pou-comic-issue',
@@ -30,7 +31,7 @@ export class ComicIssueComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private apollo: Apollo) { }
 
   ngOnInit() {
-    this.issue$ = this.route.params.do(({id}) => this.id = id).switchMap(this.getIssue);
+    this.issue$ = this.route.params.pipe(tap(({id}) => this.id = id), switchMap(this.getIssue));
   }
 
   private getIssue = params => this.apollo.watchQuery({
@@ -52,7 +53,7 @@ export class ComicIssueComponent implements OnInit {
       comic: params.id,
       issue: params.issue
     }
-  }).valueChanges.pluck('data', 'comic', 'issues').map(c => c[0])
+  }).valueChanges.pipe(pluck('data', 'comic', 'issues'), map(c => c[0]))
 
   updatePage = (page) => {
     this.apollo.mutate({

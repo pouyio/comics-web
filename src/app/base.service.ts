@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+import { of } from 'rxjs';
 import { AuthService } from './auth.service';
 import { ResolveService } from './resolve.service';
 import { environment } from '../environments/environment';
@@ -25,6 +24,6 @@ export class BaseService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    return Observable.throw(errMsg);
+    return of(errMsg);
   }
 }
