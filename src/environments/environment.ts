@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://localhost:9000/graphql',
-  rest_url: 'http://localhost:9000'
+  api_url: "http://localhost:5000/comics-ffb4d/europe-west1/api/graphql",
+  rest_url: "http://localhost:5000/comics-ffb4d/europe-west1/api"
 };
