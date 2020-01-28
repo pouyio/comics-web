@@ -18,7 +18,7 @@ export class SearchComponent {
   searchForm = new FormControl();
   isLoading = false;
 
-  @ViewChild('resultsList') resultsList: ElementRef;
+  @ViewChild('resultsList', { static: false }) resultsList: ElementRef;
 
   private searchQuery = gql`
   query searchComics($search: String!) {
