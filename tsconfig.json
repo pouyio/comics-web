@@ -22,6 +22,6 @@
       "dom",
       "esnext.asynciterable"
     ],
-    "module": "es2015"
+    "module": "esnext"
   }
 }
