@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'apollo-link';
 import { Apollo } from 'apollo-angular';
-import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
 import { ActivatedRoute, Router } from '@angular/router';
 import { pluck, share, filter } from 'rxjs/operators';
