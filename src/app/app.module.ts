@@ -63,7 +63,7 @@ import { APOLLO_OPTIONS } from "apollo-angular";
     ReactiveFormsModule,
     HttpClientModule,
     OrderModule,
-    RouterModule.forRoot(AppRoutes),
+    RouterModule.forRoot(AppRoutes, { relativeLinkResolution: 'legacy' }),
     InViewportModule,
   ],
   providers: [
