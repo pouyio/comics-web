@@ -36,6 +36,7 @@ import { EntityResolverPipe } from "./pipes/entity-resolver.pipe";
 import { EntityFormComponent } from "./components/entity-form/entity-form.component";
 import { SlowImageComponent } from "./components/slow-image/slow-image.component";
 import { APOLLO_OPTIONS } from "apollo-angular";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,12 @@ import { APOLLO_OPTIONS } from "apollo-angular";
     OrderModule,
     RouterModule.forRoot(AppRoutes, { relativeLinkResolution: 'legacy' }),
     InViewportModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     AuthService,
