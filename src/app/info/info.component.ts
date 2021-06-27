@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import gql from "graphql-tag";
 import { Apollo } from "apollo-angular";
-import { tap, share } from "rxjs/operators";
+import { tap, share, pluck } from "rxjs/operators";
 import { Observable } from "rxjs";
 
 @Component({
@@ -44,7 +44,9 @@ export class InfoComponent implements OnInit {
   ngOnInit() {
     this.$info = this.apollo.query({ query: this.infoQuery }).pipe(
       share(),
-      tap(({ data }: any) => this.setDaysSinceLastUpdate(data.info.last_update))
+      pluck("data"),
+      pluck("info"),
+      tap(({ last_update }) => this.setDaysSinceLastUpdate(last_update))
     );
   }
 
