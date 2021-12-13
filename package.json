@@ -24,7 +24,7 @@
     "@angular/router": "11.0.0",
     "@angular/service-worker": "11.0.0",
     "@apollo/client": "^3.2.5",
-    "apollo-angular": "^2.1.0",
+    "apollo-angular": "^2.6.0",
     "bulma": "^0.6.2",
     "bulma-slider": "1.0.1",
     "bulma-switch": "1.0.1",
